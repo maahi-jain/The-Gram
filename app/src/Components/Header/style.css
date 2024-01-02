@@ -1,0 +1,15 @@
+h1 {
+  font-family: sans-serif;
+  font-size: 34px;
+  color: white;
+  margin-top: 0px;
+  padding-top: 2%;
+}
+
+.header {
+  background-color: black;
+  padding-left: 2%;
+  display: flex;
+  gap: 2%;
+  align-items: center;
+}

@@ -1,0 +1,14 @@
+#loginForm {
+  margin: auto;
+  margin: 20% 30%;
+  text-align: center;
+}
+
+.input {
+  margin-block-end: 10%;
+}
+
+.loginButton {
+  margin: auto;
+  margin-bottom: 2%;
+}

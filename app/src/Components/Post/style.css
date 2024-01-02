@@ -1,0 +1,10 @@
+.post {
+  max-width: 80%;
+  margin: auto;
+  margin-block-start: 2%;
+  margin-block-end: 2%;
+}
+
+#likes {
+  padding-top: 0px;
+}
