@@ -8,19 +8,18 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Typography } from "@mui/material";
-import { create } from "@mui/material/styles/createTransitions";
 
 const Post = ({ post }) => {
     const { url, caption, likes, comments, user, createdAt, mediaType } = post;
-    // let postedSince = await getSince(createdAt);
-    // let initials;
-    // if (!user.dp) {
-    //     initials = await getInitials(user.name);
-    // }
+    let postedSince = getSince(createdAt);
+    let initials;
+    if (!user.dp) {
+        initials = getInitials(user.name);
+    }
 
     return (
         <Card className="post">
-            <CardHeader avatar={user.dp ? <Avatar src={user.dp} alt="dp" title={user.name} subheader="few sec ago" /> : <Avatar label='dp'>MJ</Avatar>} title={user.name} subheader="few sec ago" />
+            <CardHeader avatar={user.dp ? <Avatar src={user.dp} alt="dp" title={user.name} subheader={postedSince} /> : <Avatar label='dp'>{initials}</Avatar>} title={user.name} subheader={postedSince} />
             <CardMedia component={mediaType} alt="post" src={url} />
             <CardContent>
                 {caption}
@@ -39,7 +38,7 @@ const Post = ({ post }) => {
     )
 }
 
-const getSince = async (createdAt) => {
+const getSince = (createdAt) => {
     let currDate = new Date();
     let timeDifferenceInSeconds = (currDate - createdAt) / 1000;
     let postedSince;
@@ -58,11 +57,11 @@ const getSince = async (createdAt) => {
     return postedSince;
 }
 
-const getInitials = async (userName) => {
+const getInitials = (userName) => {
     let name = userName.split(" ");
     let initials = "";
     name.forEach((elem) => {
-        initials += elem.substring(0, 1)
+        initials += elem.substring(0, 1).toUpperCase();
     });
     return initials;
 }

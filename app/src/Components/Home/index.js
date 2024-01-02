@@ -61,7 +61,7 @@ const Home = () => {
             likes: 424444,
             comments: 23434242,
             user: {
-                name: "Mahima jain",
+                name: "Rahul verma",
             },
             createdAt: date,
             mediaType: "img"
