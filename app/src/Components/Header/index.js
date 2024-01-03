@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Avatar from '@mui/material/Avatar';
 import "./style.css";
 import dp from "../../assets/profile.jpeg";
 import MenuIcon from '@mui/icons-material/Menu';
-import useWindowSize from "../CustomHooks/useWindowSize";
+import useWindowSize from "../../CustomHooks/useWindowSize";
 
 const Header = () => {
     const isMobile = useWindowSize();
