@@ -1,12 +1,19 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  margin-top: 80px;
+  margin-top: 1%;
 }
 
 .header {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1;
+  right: 0;
+  left: 0;
+}
+
+.main.mobile {
+  width: 100%;
+}
+
+.main.desktop {
+  margin-left: 20%;
 }
