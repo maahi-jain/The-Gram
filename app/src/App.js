@@ -6,6 +6,7 @@ import SideNav from './Components/SideNav';
 import { Box, Toolbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useWindowSize from './CustomHooks/useWindowSize';
+import BottomNav from './Components/BottomNav';
 
 function App() {
   let desktop = 'desktop';
@@ -20,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <SideNav />
+      {isMobile ? <BottomNav /> : <SideNav />}
       <Box component="main" className={"main " + windowState}>
         <Toolbar />
         <Home />
