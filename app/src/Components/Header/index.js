@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { AppBar, Toolbar } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return <AppBar id="header">
@@ -9,7 +10,9 @@ const Header = () => {
             <>
                 <h1>The Gram</h1>
             </>
-            <ChatBubbleOutlineIcon />
+            <Link to="/chat">
+                <ChatBubbleOutlineIcon />
+            </Link>
         </Toolbar>
     </AppBar>
 }
