@@ -12,8 +12,11 @@
 
 .main.mobile {
   width: 100%;
+  margin-bottom: 15%;
+  margin-top: 15%;
 }
 
 .main.desktop {
   margin-left: 20%;
+  margin-top: 10%;
 }

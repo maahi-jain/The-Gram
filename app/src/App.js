@@ -30,7 +30,6 @@ function App() {
         <Header />
         {isMobile ? <BottomNav /> : <SideNav />}
         <Box component="main" className={"main " + windowState}>
-          <Toolbar />
           <Routes>
             <Route exact path='/' element={<Login />} />
             <Route exact path='/home' element={<Home />} />
