@@ -6,15 +6,19 @@ import dp from "../../assets/profile.jpeg";
 
 const Search = () => {
     let userList = [{
+        id: 1,
         dp: dp,
         name: "Mahima Jain"
     }, {
+        id: 2,
         dp: dp,
         name: "Mahima Jain"
     }, {
+        id: 3,
         dp: dp,
         name: "Mahima Jain"
     }, {
+        id: 4,
         dp: dp,
         name: "Mahima Jain"
     }]
@@ -28,7 +32,7 @@ const Search = () => {
                 <List>
                     {userList.map(user => {
                         return (
-                            <ListItem>
+                            <ListItem key={user.id}>
                                 <ListItemAvatar>
                                     <Avatar src={user.dp} />
                                 </ListItemAvatar>

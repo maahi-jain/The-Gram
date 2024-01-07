@@ -4,4 +4,14 @@
   align-items: center;
   justify-content: center;
   padding: 2%;
+  border: 1px solid black;
+  width: 70%;
+  border-radius: 4px;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  height: 100%;
+  outline: none;
 }

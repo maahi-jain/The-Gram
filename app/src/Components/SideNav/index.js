@@ -14,14 +14,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { List, Toolbar } from "@mui/material";
 
-const SideNav = () => {
+const SideNav = ({ onLogout }) => {
     // Menu Items
     const menuItems = {
         'Home': [<HomeIcon />, "/home"],
         'Search': [<SearchOutlinedIcon />, "/search"],
         'Create': [<AddCircleRoundedIcon />, "/create"],
-        'My Profile': [<PersonIcon />, "myProfile"],
-        'Logout': [<LogoutIcon />, "logout"]
+        'My Profile': [<PersonIcon />, "profile"],
     }
 
     return (
@@ -40,6 +39,14 @@ const SideNav = () => {
                         </Link>
                     </ListItem>
                 })}
+                <ListItem>
+                    <ListItemButton onClick={() => onLogout(true)}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Drawer>
     )

@@ -6,7 +6,6 @@ import dp from "../../assets/profile.jpeg"
 const Home = () => {
     let date = new Date();
     date = new Date(date.getTime() - 1236400 * 1000);
-    console.log(date);
     let posts = [
         {
             id: 1,

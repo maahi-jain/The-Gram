@@ -4,13 +4,13 @@ import Header from './Components/Header';
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
 import Login from './Components/Login'
 import SideNav from './Components/SideNav';
-import { Box, Toolbar } from '@mui/material';
+import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useWindowSize from './CustomHooks/useWindowSize';
 import BottomNav from './Components/BottomNav';
 import Chat from './Components/Chat';
 import Logout from './Components/Logout';
-import MyProfile from './Components/MyProfile';
+import Profile from './Components/Profile';
 import CreatePost from './Components/CreatePost';
 import Search from './Components/Search';
 
@@ -19,16 +19,21 @@ function App() {
   let mobile = 'mobile';
   const isMobile = useWindowSize()
   const [windowState, setWindowState] = useState(isMobile ? mobile : desktop);
+  const [logout, setLogout] = useState(false);
 
   useEffect(() => {
     setWindowState(isMobile ? mobile : desktop)
   }, [isMobile, mobile, desktop])
 
+  const onLogout = (open) => {
+    setLogout(open);
+  }
+
   return (
     <Router>
       <div className="App">
         <Header />
-        {isMobile ? <BottomNav /> : <SideNav />}
+        {isMobile ? <BottomNav onLogout={onLogout} /> : <SideNav onLogout={onLogout} />}
         <Box component="main" className={"main " + windowState}>
           <Routes>
             <Route exact path='/' element={<Login />} />
@@ -36,10 +41,10 @@ function App() {
             <Route exact path='/chat' element={<Chat />} />
             <Route exact path='/search' element={<Search />} />
             <Route exact path='/create' element={<CreatePost />} />
-            <Route exact path='/myProfile' element={<MyProfile />} />
-            <Route exact path='/logout' element={<Logout />} />
+            <Route exact path='/profile' element={<Profile />} />
           </Routes>
         </Box>
+        <Logout open={logout} onClose={onLogout} />
       </div>
     </Router>
   );
