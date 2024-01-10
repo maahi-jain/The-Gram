@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import React from "react"
 
-const Logout = ({ open, onClose }) => {
+const Logout = ({ open, onClose, onConfirm }) => {
 
     const handleClose = () => {
         onClose(false);
@@ -11,7 +11,7 @@ const Logout = ({ open, onClose }) => {
             <DialogTitle>Logout</DialogTitle>
             <DialogContent>Do you want to logout?</DialogContent>
             <DialogActions>
-                <Button>Yes</Button>
+                <Button onClick={() => onConfirm}>Yes</Button>
                 <Button>No</Button>
             </DialogActions>
         </Dialog>
