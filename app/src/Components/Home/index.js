@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import Post from "../Post";
-import dp from "../../assets/profile.jpeg"
+import dp from "../../assets/profilePic.jpeg"
 
 const Home = () => {
     let date = new Date();

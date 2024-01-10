@@ -9,7 +9,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
 
-const BottomNav = ({ onLogout }) => {
+const BottomNav = ({ onLogout, onCreatePost }) => {
 
     const [value, setValue] = useState('Home');
 
@@ -34,8 +34,8 @@ const BottomNav = ({ onLogout }) => {
                     <BottomNavigationAction label={key} value={key} key={key} icon={menuItems[key][0]} component={Link} to={menuItems[key][1]} />
                 )
             })}
-            <BottomNavigationAction label="Create" value="create" icon={<AddCircleRoundedIcon />} />
-            <BottomNavigationAction label="Logout" value="logout" onClick={() => onLogout(true)} icon={<LogoutIcon />}></BottomNavigationAction>
+            <BottomNavigationAction label="Create" onClick={() => onCreatePost(true)} icon={<AddCircleRoundedIcon />} />
+            <BottomNavigationAction label="Logout" onClick={() => onLogout(true)} icon={<LogoutIcon />}></BottomNavigationAction>
         </BottomNavigation>
     )
 }

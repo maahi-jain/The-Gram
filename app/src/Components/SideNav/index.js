@@ -12,14 +12,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { List, Toolbar } from "@mui/material";
+import { Divider, List, Toolbar } from "@mui/material";
 
-const SideNav = ({ onLogout }) => {
+const SideNav = ({ onLogout, onCreatePost }) => {
     // Menu Items
     const menuItems = {
         'Home': [<HomeIcon />, "/home"],
         'Search': [<SearchOutlinedIcon />, "/search"],
-        'Create': [<AddCircleRoundedIcon />, "/create"],
         'My Profile': [<PersonIcon />, "profile"],
     }
 
@@ -28,17 +27,29 @@ const SideNav = ({ onLogout }) => {
             <Toolbar />
             <List>
                 {Object.keys(menuItems).map((key) => {
-                    return <ListItem key={key}>
-                        <Link to={menuItems[key][1]}>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {menuItems[key][0]}
-                                </ListItemIcon>
-                                <ListItemText primary={key} />
-                            </ListItemButton>
-                        </Link>
-                    </ListItem>
+                    return <div key={key}>
+                        <ListItem key={key}>
+                            <Link to={menuItems[key][1]}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {menuItems[key][0]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={key} />
+                                </ListItemButton>
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                    </div>
                 })}
+                <ListItem>
+                    <ListItemButton onClick={() => onCreatePost(true)}>
+                        <ListItemIcon>
+                            <AddCircleRoundedIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Create" />
+                    </ListItemButton>
+                </ListItem>
+                <Divider />
                 <ListItem>
                     <ListItemButton onClick={() => onLogout(true)}>
                         <ListItemIcon>

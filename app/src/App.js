@@ -20,6 +20,7 @@ function App() {
   const isMobile = useWindowSize()
   const [windowState, setWindowState] = useState(isMobile ? mobile : desktop);
   const [logout, setLogout] = useState(false);
+  const [createPost, setCreatePost] = useState(false);
 
   useEffect(() => {
     setWindowState(isMobile ? mobile : desktop)
@@ -29,21 +30,25 @@ function App() {
     setLogout(open);
   }
 
+  const onCreatePost = (open) => {
+    setCreatePost(open);
+  }
+
   return (
     <Router>
       <div className="App">
         <Header />
-        {isMobile ? <BottomNav onLogout={onLogout} /> : <SideNav onLogout={onLogout} />}
+        {isMobile ? <BottomNav onLogout={onLogout} onCreatePost={onCreatePost} /> : <SideNav onLogout={onLogout} onCreatePost={onCreatePost} />}
         <Box component="main" className={"main " + windowState}>
           <Routes>
             <Route exact path='/' element={<Login />} />
             <Route exact path='/home' element={<Home />} />
             <Route exact path='/chat' element={<Chat />} />
             <Route exact path='/search' element={<Search />} />
-            <Route exact path='/create' element={<CreatePost />} />
             <Route exact path='/profile' element={<Profile />} />
           </Routes>
         </Box>
+        <CreatePost open={createPost} onClose={onCreatePost} />
         <Logout open={logout} onClose={onLogout} />
       </div>
     </Router>
