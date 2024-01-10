@@ -1,7 +1,6 @@
 import React from "react"
 import SearchIcon from "@mui/icons-material/Search";
 import "./style.css";
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import dp from "../../assets/profilePic.jpeg";
 import UserList from "../UserList";
 
