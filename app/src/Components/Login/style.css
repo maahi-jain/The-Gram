@@ -12,3 +12,8 @@
   margin: auto;
   margin-bottom: 2%;
 }
+
+.errorMessage {
+  font-size: small;
+  color: red;
+}

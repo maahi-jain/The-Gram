@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthCtx = createContext();
 
@@ -34,12 +35,14 @@ const useAuthentication = () => {
 export default useAuthentication;
 
 const doLogin = (email, password) => {
-    if (email === "mahi@gmail.com" && password === "mahi123") {
-        return Promise.resolve({
-            id: 1,
-            name: "Mahima"
-        });
-    } else {
-        throw new Error("UnAuthenticated!");
-    }
+    return new Promise((resolve, reject) => {
+        if (email === "mahi@gmail.com" && password === "mahi123") {
+            resolve({
+                id: 1,
+                name: "Mahima"
+            });
+        } else {
+            reject("Invalid credentials!");
+        }
+    })
 }

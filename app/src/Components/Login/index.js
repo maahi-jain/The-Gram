@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, TextField } from "@mui/material
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css"
 import useAuthentication from "../../CustomHooks/useAuthentication";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -10,8 +10,6 @@ const Login = () => {
     const { AuthCtx } = useAuthentication();
     const { user, error, login } = useContext(AuthCtx);
     const navigate = useNavigate();
-    const location = useLocation();
-    // const from = location?.state?.from?.pathName || "/home"
 
     useEffect(() => {
         user && navigate("/home");
@@ -21,18 +19,17 @@ const Login = () => {
         <div className="container">
             <Card id="loginForm">
                 <CardContent>
-                    <form>
+                    <form onSubmit={() => login(email, password)}>
                         <div className="input">
-                            <TextField label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
+                            <TextField type="email" required label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="input">
-                            <TextField type="password" label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
+                            <TextField type="password" required label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
                         </div>
+                        <Button className="loginButton" variant="contained" type="submit">Login</Button>
+                        {error && <p className="errorMessage">{error}</p>}
                     </form>
                 </CardContent>
-                <CardActions>
-                    <Button className="loginButton" variant="contained" onClick={() => login(email, password)}>Login</Button>
-                </CardActions>
             </Card>
         </div>
     )
