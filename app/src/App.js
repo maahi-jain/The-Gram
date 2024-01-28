@@ -21,7 +21,7 @@ const App = () => {
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
   const { AuthCtx } = useAuthentication();
-  const { user, logout } = useContext(AuthCtx);
+  const { user } = useContext(AuthCtx);
 
   const onLogout = (open) => {
     setLogoutDialog(open);
@@ -46,7 +46,7 @@ const App = () => {
           </Routes>
         </Box>
         <CreatePost open={createPost} onClose={onCreatePost} />
-        <Logout open={logoutDialog} onConfirm={logout} onClose={onLogout} />
+        <Logout open={logoutDialog} onClose={onLogout} />
       </div>
     </Router>
   );

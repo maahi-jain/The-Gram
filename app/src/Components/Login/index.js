@@ -26,12 +26,12 @@ const Login = () => {
                             <TextField label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="input">
-                            <TextField label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
+                            <TextField type="password" label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </form>
                 </CardContent>
                 <CardActions>
-                    <Button className="loginButton" variant="contained" onClick={() => login(email, password)}>Logn in</Button>
+                    <Button className="loginButton" variant="contained" onClick={() => login(email, password)}>Login</Button>
                 </CardActions>
             </Card>
         </div>

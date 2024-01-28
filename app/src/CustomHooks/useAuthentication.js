@@ -40,6 +40,6 @@ const doLogin = (email, password) => {
             name: "Mahima"
         });
     } else {
-        throw Promise.reject("UnAuthenticated!");
+        throw new Error("UnAuthenticated!");
     }
 }

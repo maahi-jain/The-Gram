@@ -1,18 +1,30 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
-import React from "react"
+import React, { useContext } from "react"
+import useAuthentication from "../../CustomHooks/useAuthentication";
+import { useNavigate } from "react-router-dom";
 
-const Logout = ({ open, onClose, onConfirm }) => {
+const Logout = ({ open, onClose }) => {
+
+    const { AuthCtx } = useAuthentication();
+    const { logout } = useContext(AuthCtx);
+    const navigate = useNavigate();
+
+    const handleYes = () => {
+        logout();
+        navigate("/");
+    }
 
     const handleClose = () => {
         onClose(false);
     }
+
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Logout</DialogTitle>
             <DialogContent>Do you want to logout?</DialogContent>
             <DialogActions>
-                <Button onClick={() => onConfirm}>Yes</Button>
-                <Button>No</Button>
+                <Button onClick={() => handleYes()}>Yes</Button>
+                <Button onClick={() => handleClose()}>No</Button>
             </DialogActions>
         </Dialog>
     )
