@@ -26,11 +26,15 @@ const Login = () => {
                         <div className="input">
                             <TextField type="password" required label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <Button className="loginButton" variant="contained" type="submit">Login</Button>
+                        <Button className="loginButton" variant="contained" type="submit">Log in</Button>
                         {error && <p className="errorMessage">{error}</p>}
                     </form>
                 </CardContent>
             </Card>
+            <div className="actionBox">
+                <div>Forgot Password?</div>
+                <div>Sign up</div>
+            </div>
         </div>
     )
 }

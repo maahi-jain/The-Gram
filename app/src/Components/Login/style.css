@@ -1,4 +1,4 @@
-#loginForm {
+.container {
   margin: 8% 20%;
   text-align: center;
   width: 40%;
@@ -16,4 +16,9 @@
 .errorMessage {
   font-size: small;
   color: red;
+}
+
+.actionBox {
+  display: flex;
+  justify-content: space-between;
 }
