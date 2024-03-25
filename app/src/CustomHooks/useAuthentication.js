@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginService } from "../Components/Service/api.service";
 
 const AuthCtx = createContext();
 
@@ -7,8 +8,8 @@ const useAuthentication = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
 
-    const login = (email, password) => {
-        doLogin(email, password).then((user) => {
+    const login = (userIdOrEmail, password) => {
+        doLogin(userIdOrEmail, password).then((user) => {
             setUser(user);
             setError(null);
         }).catch((error) => {
@@ -34,15 +35,12 @@ const useAuthentication = () => {
 
 export default useAuthentication;
 
-const doLogin = (email, password) => {
+const doLogin = (userIdOrEmail, password) => {
     return new Promise((resolve, reject) => {
-        if (email === "mahi@gmail.com" && password === "mahi123") {
-            resolve({
-                id: 1,
-                name: "Mahima"
-            });
-        } else {
-            reject("Invalid credentials!");
-        }
+        loginService(userIdOrEmail, password).then((res) => {
+            resolve(res.user)
+        }).catch((err) => {
+            reject(err.message)
+        })
     })
 }

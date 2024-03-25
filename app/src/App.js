@@ -15,6 +15,7 @@ import CreatePost from './Components/CreatePost';
 import Search from './Components/Search';
 import useAuthentication from './CustomHooks/useAuthentication';
 import Protected from './Components/Protected';
+import Signup from './Components/Signup';
 
 const App = () => {
   const isMobile = useWindowSize()
@@ -43,6 +44,7 @@ const App = () => {
             <Route exact path='/chat' element={<Protected user={user}><Chat /></Protected>} />
             <Route exact path='/search' element={<Protected user={user}><Search /></Protected>} />
             <Route exact path='/profile' element={<Protected user={user}><Profile /></Protected>} />
+            <Route exact path="/signup" element={<Signup />} />
           </Routes>
         </Box>
         <CreatePost open={createPost} onClose={onCreatePost} />

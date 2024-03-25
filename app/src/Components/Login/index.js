@@ -5,7 +5,7 @@ import useAuthentication from "../../CustomHooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [userIdOrEmail, setUserIdOrEmail] = useState("");
     const [password, setPassword] = useState("");
     const { AuthCtx } = useAuthentication();
     const { user, error, login } = useContext(AuthCtx);
@@ -15,13 +15,18 @@ const Login = () => {
         user && navigate("/home");
     }, [user, navigate]);
 
+    let handleSubmit = (event) => {
+        event.preventDefault();
+        login(userIdOrEmail, password)
+    }
+
     return (
         <div className="container">
             <Card id="loginForm">
                 <CardContent>
-                    <form onSubmit={() => login(email, password)}>
+                    <form onSubmit={handleSubmit}>
                         <div className="input">
-                            <TextField type="email" required label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
+                            <TextField type="text" required label="UserId or Email" variant="outlined" onChange={(e) => setUserIdOrEmail(e.target.value)} />
                         </div>
                         <div className="input">
                             <TextField type="password" required label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
@@ -32,8 +37,8 @@ const Login = () => {
                 </CardContent>
             </Card>
             <div className="actionBox">
-                <div>Forgot Password?</div>
-                <div>Sign up</div>
+                <a href="/">Forgot Password?</a>
+                <a href="/signup">Sign up</a>
             </div>
         </div>
     )
