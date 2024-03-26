@@ -16,3 +16,14 @@ export const loginService = async (userIdOrEmail, password) => {
         throw error.response.data; // Rethrow the error for handling at a higher level if needed
     }
 };
+
+export const singUp = async (user) => {
+    try {
+        const res = await axios.post(`${baseURL}/user/signup`, user);
+        return res.data;
+
+    } catch (error) {
+        console.log(error);
+        throw error.response.data; // Rethrow the error for handling at a higher level if needed
+    }
+}

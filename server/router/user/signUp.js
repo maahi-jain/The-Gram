@@ -8,11 +8,12 @@ const signUp = (req, res) => {
             name: body.name,
             userId: body.userId,
             password: body.password,
-            phoneNumber: body.phoneNumber
+            phoneNumber: body.phoneNumber,
+            email: body.email
         });
 
         User.create(user).then((result) => {
-            res.status(200).send({ message: "User created successfully!--", object: result })
+            res.status(200).send({ message: "User created successfully!--", user: result })
         }).catch((err) => {
             res.status(500).send({ message: err.message });
         })
