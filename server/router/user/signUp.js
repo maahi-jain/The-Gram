@@ -9,7 +9,8 @@ const signUp = (req, res) => {
             userId: body.userId,
             password: body.password,
             phoneNumber: body.phoneNumber,
-            email: body.email
+            email: body.email,
+            profilePic: body.dp
         });
 
         User.create(user).then((result) => {

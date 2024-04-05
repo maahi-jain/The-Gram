@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css"
-import useAuthentication from "../../CustomHooks/useAuthentication";
+import useAuthentication from "../../customHooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

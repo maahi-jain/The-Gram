@@ -7,7 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { Avatar, Button } from '@mui/material';
 import dp from '../../assets/profilePic.jpeg';
 import './style.css';
-import useWindowSize from '../../CustomHooks/useWindowSize';
+import useWindowSize from '../../customHooks/useWindowSize';
 import UserList from '../UserList';
 
 export default function LabTabs() {

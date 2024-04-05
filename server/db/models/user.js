@@ -3,33 +3,33 @@ import { Schema, model } from "mongoose";
 const UserSchema = new Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     phoneNumber: {
         type: String,
         unique: true,
-        require: true
+        required: true
     },
     email: {
         type: String,
         unique: true,
-        require: true
+        required: true
     },
     userId: {
         type: String,
         unique: true,
-        require: true
+        required: true
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     bio: {
         type: String
     },
-    // profilePic: {
-    //     type: media
-    // },
+    profilePic: {
+        type: Buffer
+    },
     createdAt: {
         type: Date,
         default: Date.now

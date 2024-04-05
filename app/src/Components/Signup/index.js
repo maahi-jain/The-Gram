@@ -3,16 +3,20 @@ import React, { useState } from "react";
 import "./style.css";
 import { singUp } from "../Service/api.service";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userAction";
 
 const Signup = () => {
 
     const [formData, setFormData] = useState({
+        profilePic: '',
         phoneNumber: '',
         name: '',
         userId: '',
         email: '',
         password: ''
     });
+    const dispatch = useDispatch();
     const [error, setError] = useState();
 
     const navigate = useNavigate();
@@ -21,6 +25,8 @@ const Signup = () => {
         event.preventDefault();
         setError(null);
         singUp(formData).then((res) => {
+            let action = setUser(res.user);
+            dispatch(action);
             navigate("/home");
         }).catch((error) => {
             setError(error.message);
@@ -44,6 +50,9 @@ const Signup = () => {
             <Card>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
+                        <div className="input">
+                            <TextField type="meida" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" />
+                        </div>
                         <div className="input">
                             <TextField type="text" name="phoneNumber" onChange={handleInputChange} required label="Mobile Number" variant="outlined" />
                         </div>

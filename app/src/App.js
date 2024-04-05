@@ -1,28 +1,31 @@
 import './App.css';
-import Home from './Components/Home';
-import Header from './Components/Header';
+import Home from './components/Home';
+import Header from './components/Header';
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
-import Login from './Components/Login'
-import SideNav from './Components/SideNav';
+import Login from './components/Login'
+import SideNav from './components/SideNav';
 import { Box } from '@mui/material';
 import { useContext, useState } from 'react';
-import useWindowSize from './CustomHooks/useWindowSize';
-import BottomNav from './Components/BottomNav';
-import Chat from './Components/Chat';
-import Logout from './Components/Logout';
-import Profile from './Components/Profile';
-import CreatePost from './Components/CreatePost';
-import Search from './Components/Search';
-import useAuthentication from './CustomHooks/useAuthentication';
-import Protected from './Components/Protected';
-import Signup from './Components/Signup';
+import useWindowSize from './customHooks/useWindowSize';
+import BottomNav from './components/BottomNav';
+import Chat from './components/Chat';
+import Logout from './components/Logout';
+import Profile from './components/Profile';
+import CreatePost from './components/CreatePost';
+import Search from './components/Search';
+import useAuthentication from './customHooks/useAuthentication';
+import Protected from './components/Protected';
+import Signup from './components/Signup';
+import { useSelector } from 'react-redux';
 
 const App = () => {
   const isMobile = useWindowSize()
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
   const { AuthCtx } = useAuthentication();
-  const { user } = useContext(AuthCtx);
+  const user = useContext(AuthCtx);
+  const u = useSelector(state => state?.user);
+  console.log(u);
 
   const onLogout = (open) => {
     setLogoutDialog(open);

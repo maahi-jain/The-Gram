@@ -1,35 +1,44 @@
 import React, { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { loginService } from "../Components/Service/api.service";
+import { loginService } from "../components/Service/api.service";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../store/userAction";
 
 const AuthCtx = createContext();
 
 const useAuthentication = () => {
-    const [user, setUser] = useState(null);
+    const user = useSelector(state => state?.user);
+    console.log(user);
+    const dispatch = useDispatch();
     const [error, setError] = useState(null);
+
+    const dispatchSetUser = async (user) => {
+        let action = await setUser(user);
+        dispatch(action);
+    }
 
     const login = (userIdOrEmail, password) => {
         doLogin(userIdOrEmail, password).then((user) => {
-            setUser(user);
+            dispatchSetUser(user);
             setError(null);
         }).catch((error) => {
-            setUser(null);
+            dispatchSetUser(null);
             setError(error);
         })
     }
 
     const logout = () => {
-        setUser(null);
+        dispatchSetUser(null);
         setError(null);
     }
 
+    const AuthProvider = ({ children }) => (
+        <AuthCtx.Provider value={{ error, user, login, logout }}>
+            {children}
+        </AuthCtx.Provider>
+    );
+
     return {
-        AuthCtx,
-        AuthProvider: ({ children }) => (
-            <AuthCtx.Provider value={{ error, user, login, logout }}>
-                {children}
-            </AuthCtx.Provider>
-        )
+        AuthCtx, AuthProvider
     }
 }
 
