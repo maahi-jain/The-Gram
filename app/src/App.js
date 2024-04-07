@@ -5,7 +5,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
 import Login from './components/Login'
 import SideNav from './components/SideNav';
 import { Box } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import useWindowSize from './customHooks/useWindowSize';
 import BottomNav from './components/BottomNav';
 import Chat from './components/Chat';
@@ -13,7 +13,6 @@ import Logout from './components/Logout';
 import Profile from './components/Profile';
 import CreatePost from './components/CreatePost';
 import Search from './components/Search';
-import useAuthentication from './customHooks/useAuthentication';
 import Protected from './components/Protected';
 import Signup from './components/Signup';
 import { useSelector } from 'react-redux';
@@ -22,10 +21,7 @@ const App = () => {
   const isMobile = useWindowSize()
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
-  const { AuthCtx } = useAuthentication();
-  const user = useContext(AuthCtx);
-  const u = useSelector(state => state?.user);
-  console.log(u);
+  const user = useSelector(state => state.user);
 
   const onLogout = (open) => {
     setLogoutDialog(open);

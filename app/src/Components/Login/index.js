@@ -1,13 +1,12 @@
 import { Button, Card, CardActions, CardContent, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css"
-import useAuthentication from "../../customHooks/useAuthentication";
+import { AuthCtx } from "../../customHooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [userIdOrEmail, setUserIdOrEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { AuthCtx } = useAuthentication();
     const { user, error, login } = useContext(AuthCtx);
     const navigate = useNavigate();
 

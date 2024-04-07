@@ -1,11 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import React, { useContext } from "react"
-import useAuthentication from "../../customHooks/useAuthentication";
+import { AuthCtx } from "../../customHooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
 
 const Logout = ({ open, onClose }) => {
-
-    const { AuthCtx } = useAuthentication();
     const { logout } = useContext(AuthCtx);
     const navigate = useNavigate();
 

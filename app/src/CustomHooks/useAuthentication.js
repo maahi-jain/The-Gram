@@ -5,7 +5,7 @@ import { setUser } from "../store/userAction";
 
 const AuthCtx = createContext();
 
-const useAuthentication = () => {
+const AuthProvider = ({ children }) => {
     const user = useSelector(state => state?.user);
     console.log(user);
     const dispatch = useDispatch();
@@ -31,18 +31,10 @@ const useAuthentication = () => {
         setError(null);
     }
 
-    const AuthProvider = ({ children }) => (
-        <AuthCtx.Provider value={{ error, user, login, logout }}>
-            {children}
-        </AuthCtx.Provider>
-    );
-
-    return {
-        AuthCtx, AuthProvider
-    }
+    return (<AuthCtx.Provider value={{ error, user, login, logout }}>
+        {children}
+    </AuthCtx.Provider>)
 }
-
-export default useAuthentication;
 
 const doLogin = (userIdOrEmail, password) => {
     return new Promise((resolve, reject) => {
@@ -53,3 +45,5 @@ const doLogin = (userIdOrEmail, password) => {
         })
     })
 }
+
+export { AuthCtx, AuthProvider };

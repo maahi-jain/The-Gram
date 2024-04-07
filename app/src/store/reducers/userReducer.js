@@ -1,10 +1,4 @@
-const initalState = {
-    phoneNumber: '',
-    name: '',
-    userId: '',
-    email: '',
-    password: ''
-}
+const initalState = null;
 
 const userReducer = (state = initalState, action) => {
     switch (action.type) {
