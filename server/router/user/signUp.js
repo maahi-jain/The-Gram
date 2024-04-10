@@ -1,20 +1,21 @@
 import User from "../../db/models/user.js";
+import bcrypt from 'bcrypt';
 
-
-const signUp = (req, res) => {
+const signUp = async (req, res) => {
     try {
         let body = req.body;
+        let hashedPassword = await bcrypt.hash(body.password, 12)
         const user = new User({
             name: body.name,
             userId: body.userId,
-            password: body.password,
+            password: hashedPassword,
             phoneNumber: body.phoneNumber,
             email: body.email,
-            profilePic: body.dp
+            profilePic: req.file.path
         });
 
         User.create(user).then((result) => {
-            res.status(200).send({ message: "User created successfully!--", user: result })
+            res.status(200).send({ message: "User created successfully!--" })
         }).catch((err) => {
             res.status(500).send({ message: err.message });
         })

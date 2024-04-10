@@ -28,7 +28,7 @@ const UserSchema = new Schema({
         type: String
     },
     profilePic: {
-        type: Buffer
+        type: String
     },
     createdAt: {
         type: Date,
