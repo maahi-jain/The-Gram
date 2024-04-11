@@ -1,10 +1,22 @@
-const initalState = null;
+const initalState = {
+    userId: '',
+    name: '',
+    email: '',
+    bio: '',
+    profilePic: '',
+};
 
 const userReducer = (state = initalState, action) => {
     switch (action.type) {
         case "SET_USER":
-            state = action.user;
-            break;
+            return {
+                ...state,
+                email: action.user?.email,
+                userId: action.user?.userId,
+                name: action.user?.name,
+                bio: action.user?.bio,
+                profilePic: action.user?.profilePic
+            }
         default:
             return state
     }

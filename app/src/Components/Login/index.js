@@ -3,16 +3,18 @@ import React, { useContext, useEffect, useState } from "react";
 import "./style.css"
 import { AuthCtx } from "../../customHooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Login = () => {
     const [userIdOrEmail, setUserIdOrEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { user, error, login } = useContext(AuthCtx);
+    const isLoggedIn = useSelector(state => state.token.isLoggedIn);
+    const { error, login } = useContext(AuthCtx);
     const navigate = useNavigate();
 
     useEffect(() => {
-        user && navigate("/home");
-    }, [user, navigate]);
+        isLoggedIn && navigate("/home");
+    }, [isLoggedIn, navigate]);
 
     let handleSubmit = (event) => {
         event.preventDefault();

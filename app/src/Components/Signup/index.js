@@ -4,7 +4,7 @@ import "./style.css";
 import { singUp } from "../Service/api.service";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/userAction";
+import { setUser } from "../../store/action";
 
 const Signup = () => {
 

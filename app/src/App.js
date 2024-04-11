@@ -21,7 +21,7 @@ const App = () => {
   const isMobile = useWindowSize()
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
-  const user = useSelector(state => state.user);
+  const isLoggedIn = useSelector(state => state.token.isLoggedIn);
 
   const onLogout = (open) => {
     setLogoutDialog(open);
@@ -35,14 +35,14 @@ const App = () => {
     <Router>
       <div className="App">
         <Header />
-        {user && (isMobile ? <BottomNav onLogout={onLogout} onCreatePost={onCreatePost} /> : <SideNav onLogout={onLogout} onCreatePost={onCreatePost} />)}
+        {isLoggedIn && (isMobile ? <BottomNav onLogout={onLogout} onCreatePost={onCreatePost} /> : <SideNav onLogout={onLogout} onCreatePost={onCreatePost} />)}
         <Box component="main" className={isMobile ? "main mobile" : "main desktop"}>
           <Routes>
             <Route exact path='/' element={<Login />} />
-            <Route exact path='/home' element={<Protected user={user}><Home /></Protected>} />
-            <Route exact path='/chat' element={<Protected user={user}><Chat /></Protected>} />
-            <Route exact path='/search' element={<Protected user={user}><Search /></Protected>} />
-            <Route exact path='/profile' element={<Protected user={user}><Profile /></Protected>} />
+            <Route exact path='/home' element={<Protected><Home /></Protected>} />
+            <Route exact path='/chat' element={<Protected><Chat /></Protected>} />
+            <Route exact path='/search' element={<Protected><Search /></Protected>} />
+            <Route exact path='/profile' element={<Protected><Profile /></Protected>} />
             <Route exact path="/signup" element={<Signup />} />
           </Routes>
         </Box>

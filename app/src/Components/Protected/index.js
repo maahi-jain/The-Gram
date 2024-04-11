@@ -1,9 +1,11 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Protected = ({ user, children, ...rest }) => {
+const Protected = ({ children, ...rest }) => {
+    const isLoggedIn = useSelector(state => state.token.isLoggedIn);
     return (
-        user ? children : <Navigate to="/" replace />
+        isLoggedIn ? children : <Navigate to="/" replace />
     )
 }
 
