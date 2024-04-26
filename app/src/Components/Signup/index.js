@@ -1,10 +1,8 @@
-import { Button, Card, CardContent, CardHeader, TextField } from "@mui/material";
+import { Button, Card, CardContent, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "./style.css";
 import { signUp } from "../Service/api.service";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/action";
 
 const Signup = () => {
 

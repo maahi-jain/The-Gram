@@ -1,12 +1,14 @@
 import jwt from 'jsonwebtoken';
 
-const authenticate = (req, res) => {
+const authenticate = (req, res, next) => {
     try {
-        let token = req.headers.Authorization;
-        let user = jwt.verify(token, process.env.jwt_secret);
-        req.user = user;
+        let token = req.headers.authorization;
+        let decodedToken = jwt.verify(token, process.env.jwt_secret);
+        req.user = decodedToken.user;
         next();
     } catch (err) {
-        res.status(err.statusCode).send({ message: err.message });
+        res.status(401).send({ message: "Unanuthorized: " + err.message });
     }
 }
+
+export default authenticate;

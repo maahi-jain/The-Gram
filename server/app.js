@@ -1,6 +1,7 @@
 import express from "express";
 import connectToDb from "./db/index.js";
 import user from "./router/user/index.js";
+import post from "./router/post/index.js"
 import cors from 'cors';
 import 'dotenv/config';
 
@@ -10,6 +11,7 @@ app.use(cors());
 
 app.use('/uploads', express.static('uploads'));
 app.use("/user", user);
+app.use("/post", post)
 
 
 app.get("/", (req, res) => {
