@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, CardHeader, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "./style.css";
-import { singUp } from "../Service/api.service";
+import { signUp } from "../Service/api.service";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/action";
@@ -16,7 +16,7 @@ const Signup = () => {
         email: '',
         password: ''
     });
-    const dispatch = useDispatch();
+
     const [error, setError] = useState();
 
     const navigate = useNavigate();
@@ -24,10 +24,8 @@ const Signup = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError(null);
-        singUp(formData).then((res) => {
-            let action = setUser(res.user);
-            dispatch(action);
-            navigate("/home");
+        signUp(formData).then((res) => {
+            navigate("/");
         }).catch((error) => {
             setError(error.message);
         });
@@ -35,11 +33,19 @@ const Signup = () => {
     }
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        })
+        const { name, value, files } = event.target;
+        if (name === 'profilePic' && files.length > 0) {
+            const file = files[0];
+            setFormData({
+                ...formData,
+                profilePic: file
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            })
+        }
     }
 
     return (
@@ -49,9 +55,9 @@ const Signup = () => {
             </h2>
             <Card>
                 <CardContent>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} enctype="multipart/form-data">
                         <div className="input">
-                            <TextField type="meida" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" />
+                            <TextField type="file" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" />
                         </div>
                         <div className="input">
                             <TextField type="text" name="phoneNumber" onChange={handleInputChange} required label="Mobile Number" variant="outlined" />

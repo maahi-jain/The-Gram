@@ -10,6 +10,7 @@ const Logout = ({ open, onClose }) => {
     const handleYes = async () => {
         await logout();
         navigate("/");
+        onClose(false);
     }
 
     const handleClose = () => {
@@ -21,8 +22,8 @@ const Logout = ({ open, onClose }) => {
             <DialogTitle>Logout</DialogTitle>
             <DialogContent>Do you want to logout?</DialogContent>
             <DialogActions>
-                <Button onClick={() => handleYes()}>Yes</Button>
-                <Button onClick={() => handleClose()}>No</Button>
+                <Button onClick={handleYes}>Yes</Button>
+                <Button onClick={handleClose}>No</Button>
             </DialogActions>
         </Dialog>
     )

@@ -17,9 +17,17 @@ export const loginService = async (userIdOrEmail, password) => {
     }
 };
 
-export const singUp = async (user) => {
+export const signUp = async (user) => {
     try {
-        const res = await axios.post(`${baseURL}/user/signup`, user);
+        let formData = new FormData();
+        formData.append('name', user.name);
+        formData.append('userId', user.userId);
+        formData.append('password', user.password);
+        formData.append('phoneNumber', user.phoneNumber);
+        formData.append('email', user.email);
+        formData.append('profilePic', user.profilePic);
+
+        const res = await axios.post(`${baseURL}/user/signup`, formData);
         return res.data;
 
     } catch (error) {

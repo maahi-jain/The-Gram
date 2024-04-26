@@ -12,7 +12,7 @@ const login = async (req, res) => {
 
         if (match) {
             console.log("User found!");
-            var token = await jwt.sign({ user }, process.env.jwt_secret);
+            var token = jwt.sign({ user }, process.env.jwt_secret);
             res.status(200).send({ token: token });
         } else {
             console.log("User not found!")

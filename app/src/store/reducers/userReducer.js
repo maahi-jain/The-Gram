@@ -15,7 +15,7 @@ const userReducer = (state = initalState, action) => {
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,
-                profilePic: action.user?.profilePic
+                profilePic: "http://localhost:8080/" + action.user?.profilePic
             }
         default:
             return state
