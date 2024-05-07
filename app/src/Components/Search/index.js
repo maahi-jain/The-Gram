@@ -1,31 +1,40 @@
-import React from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import SearchIcon from "@mui/icons-material/Search";
 import "./style.css";
-import dp from "../../assets/profilePic.jpeg";
+import debounce from "lodash.debounce";
 import UserList from "../UserList";
+import { getUserList } from "../Service/api.service";
+import { useSelector } from "react-redux";
 
 const Search = () => {
-    let userList = [{
-        id: 1,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 2,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 3,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 4,
-        dp: dp,
-        name: "Mahima Jain"
-    }]
+    const [searchVal, setSearchVal] = useState('');
+    const [userList, setUserList] = useState([]);
+    const token = useSelector((state) => state.auth.token)
+
+    const fetchUsers = () => {
+        getUserList(searchVal, token).then((res) => {
+            setUserList(res.users)
+        }).catch((err) => {
+            console.log(err);
+        })
+    };
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const handleInputChange = (event) => {
+        setSearchVal(event.target.value);
+        debounce(() => {
+            console.log("Debounced");
+            fetchUsers();
+        }, 500);
+    }
+
     return (
         <>
             <div className="searchBar">
-                <input type="text" className="searchInput" placeholder="search" />
+                <input type="text" onChange={handleInputChange} value={searchVal} className="searchInput" placeholder="search" />
                 <SearchIcon />
             </div>
             <div className="userList">

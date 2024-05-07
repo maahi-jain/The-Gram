@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Login = () => {
     const [userIdOrEmail, setUserIdOrEmail] = useState("");
     const [password, setPassword] = useState("");
-    const isLoggedIn = useSelector(state => state.token.isLoggedIn);
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const { error, login } = useContext(AuthCtx);
     const navigate = useNavigate();
 

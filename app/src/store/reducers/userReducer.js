@@ -6,6 +6,8 @@ const initalState = {
     profilePic: '',
 };
 
+const baseURL = "http://localhost:8080/";
+
 const userReducer = (state = initalState, action) => {
     switch (action.type) {
         case "SET_USER":
@@ -15,7 +17,7 @@ const userReducer = (state = initalState, action) => {
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,
-                profilePic: "http://localhost:8080/" + action.user?.profilePic
+                profilePic: baseURL + action.user?.profilePic
             }
         default:
             return state

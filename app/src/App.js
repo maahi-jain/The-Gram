@@ -21,7 +21,7 @@ const App = () => {
   const isMobile = useWindowSize()
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
-  const isLoggedIn = useSelector(state => state.token.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   const onLogout = (open) => {
     setLogoutDialog(open);
