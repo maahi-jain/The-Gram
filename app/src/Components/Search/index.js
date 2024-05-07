@@ -25,10 +25,7 @@ const Search = () => {
 
     const handleInputChange = (event) => {
         setSearchVal(event.target.value);
-        debounce(() => {
-            console.log("Debounced");
-            fetchUsers();
-        }, 500);
+        debounce(fetchUsers, 500)();
     }
 
     return (

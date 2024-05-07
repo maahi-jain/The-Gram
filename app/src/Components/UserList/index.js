@@ -7,7 +7,7 @@ const UserList = ({ users }) => {
     return (<List>
         {users && users.map(user => {
             return (
-                <div key={user.id}>
+                <div key={user._id}>
                     <ListItem key={user._id}>
                         <ListItemAvatar>
                             <Avatar src={baseURL + user?.profilePic} />
