@@ -34,7 +34,7 @@ export const signUp = async (user) => {
 
     } catch (error) {
         console.log(error);
-        throw error.response.data; // Rethrow the error for handling at a higher level if needed
+        throw error.response.data;
     }
 }
 
@@ -66,6 +66,21 @@ export const getUserList = async (q, token) => {
             }
         }
         const res = await axios.get(`${baseURL}/user/`, httpOptions);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
+export const getUserPost = async (userId, token) => {
+    try {
+        let httpOptions = {
+            headers: {
+                Authorization: token
+            }
+        }
+        const res = await axios.get(`${baseURL}/user/${userId}/post`, httpOptions);
         return res.data;
     } catch (error) {
         console.log(error);

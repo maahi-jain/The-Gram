@@ -5,50 +5,32 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Avatar, Button } from '@mui/material';
-import dp from '../../assets/profilePic.jpeg';
 import './style.css';
 import useWindowSize from '../../customHooks/useWindowSize';
-import UserList from '../UserList';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getUserPost } from '../Service/api.service';
+import GridPost from '../GridPost';
+import { useLocation } from 'react-router-dom';
 
-export default function LabTabs() {
+export default function Profile(props) {
     const [value, setValue] = React.useState('1');
-    const user = useSelector(state => state.user);
+    const location = useLocation();
+    const searchUser = location.state?.user;
+    const loggedInUser = useSelector(state => state.user);
+    const user = searchUser || loggedInUser;
+    const token = useSelector(state => state.auth.token);
+    const [posts, setPosts] = useState();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    // let user = {
-    //     id: 1,
-    //     name: "Mahima Jain",
-    //     profile: dp,
-    //     bio: "hey",
-    //     followers: {
-    //         count: 1232432
-    //     },
-    //     following: {
-    //         count: 2459827405
-    //     }
-    // }
-
-    let userList = [{
-        id: 1,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 2,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 3,
-        dp: dp,
-        name: "Mahima Jain"
-    }, {
-        id: 4,
-        dp: dp,
-        name: "Mahima Jain"
-    }]
+    useEffect(() => {
+        getUserPost(user.userId, token).then((res) => {
+            setPosts(res.posts);
+        })
+    }, [])
 
     const isMobile = useWindowSize();
 
@@ -60,7 +42,8 @@ export default function LabTabs() {
                     <div>{user.userId}</div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
-                    <Button className='editButton' variant='contained'>Edit Profile</Button>
+                    {!searchUser && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
+                    {searchUser && <Button className='actionButton' variant='contained'>Follow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -72,9 +55,9 @@ export default function LabTabs() {
                             <Tab label={user.following.count + "\n following"} value="3" /> */}
                         </TabList>
                     </Box>
-                    <TabPanel value="1">Post</TabPanel>
-                    <TabPanel value="2"><UserList users={userList} /></TabPanel>
-                    <TabPanel value="3"><UserList users={userList} /></TabPanel>
+                    <TabPanel value="1"><GridPost posts={posts} /></TabPanel>
+                    {/* <TabPanel value="2"><UserList users={userList} /></TabPanel>
+                    <TabPanel value="3"><UserList users={userList} /></TabPanel> */}
                 </TabContext>
             </Box>
         </>
