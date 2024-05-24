@@ -9,7 +9,7 @@ import './style.css';
 import useWindowSize from '../../customHooks/useWindowSize';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getUserPost } from '../Service/api.service';
+import { follow, getUserPost } from '../Service/api.service';
 import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
 
@@ -33,8 +33,8 @@ export default function Profile(props) {
 
     const isMobile = useWindowSize();
 
-    const follow = (user) => {
-
+    const followUser = async (user) => {
+        await follow(user._id);
     }
 
     return (

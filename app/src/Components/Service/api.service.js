@@ -75,6 +75,12 @@ export const getUserPost = async (userId) => {
     }
 }
 
-export const follow = (userId) => {
-
+export const follow = async (userId) => {
+    try {
+        const res = await axios.get(`${baseURL / user / follow / userId}`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
 }

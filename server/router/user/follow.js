@@ -16,7 +16,7 @@ const follow = async (req, res) => {
         await User.findByIdAndUpdate(followingId,
             { $addToSet: { followers: loggedInUserId } }).then(() => console.log("Followers added successully"));
 
-        res.status(200).send({ status: 'Success!', user });
+        res.status(200).send({ status: 'Success!', _user: user });
 
     } catch (err) {
         console.log(err.message);
