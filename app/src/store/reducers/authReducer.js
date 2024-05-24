@@ -6,6 +6,7 @@ const initialState = {
 const tokenReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_TOKEN":
+            localStorage.setItem('token', action.token)
             return {
                 ...state,
                 token: action.token,

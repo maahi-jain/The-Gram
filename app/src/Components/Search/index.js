@@ -1,18 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import SearchIcon from "@mui/icons-material/Search";
 import "./style.css";
 import debounce from "lodash.debounce";
 import UserList from "../UserList";
 import { getUserList } from "../Service/api.service";
-import { useSelector } from "react-redux";
 
 const Search = () => {
     const [searchVal, setSearchVal] = useState('');
     const [userList, setUserList] = useState([]);
-    const token = useSelector((state) => state.auth.token)
 
     const fetchUsers = () => {
-        getUserList(searchVal, token).then((res) => {
+        getUserList(searchVal).then((res) => {
             setUserList(res.users)
         }).catch((err) => {
             console.log(err);

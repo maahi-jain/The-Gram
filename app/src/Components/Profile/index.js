@@ -19,7 +19,6 @@ export default function Profile(props) {
     const searchUser = location.state?.user;
     const loggedInUser = useSelector(state => state.user);
     const user = searchUser || loggedInUser;
-    const token = useSelector(state => state.auth.token);
     const [posts, setPosts] = useState();
 
     const handleChange = (event, newValue) => {
@@ -27,12 +26,16 @@ export default function Profile(props) {
     };
 
     useEffect(() => {
-        getUserPost(user.userId, token).then((res) => {
+        getUserPost(user.userId).then((res) => {
             setPosts(res.posts);
         })
     }, [])
 
     const isMobile = useWindowSize();
+
+    const follow = (user) => {
+
+    }
 
     return (
         <>
@@ -43,7 +46,7 @@ export default function Profile(props) {
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
                     {!searchUser && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
-                    {searchUser && <Button className='actionButton' variant='contained'>Follow</Button>}
+                    {searchUser && <Button className='actionButton' onClick={() => follow(user)} variant='contained'>Follow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>

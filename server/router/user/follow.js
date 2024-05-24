@@ -6,11 +6,14 @@ const follow = async (req, res) => {
         let followingId = req.params.userId;
 
         // Add to following of loggedin user
-        await User.updateOne({ _id: loggedInUserId },
-            { $addToSet: { following: followingId } }).then(() => console.log("following added successfully!"));
+        let user = await User.findByIdAndUpdate(loggedInUserId,
+            { $addToSet: { following: followingId } }, { new: true }).then((user) => {
+                console.log("following added successfully!");
+                return user;
+            });
 
         // Add logged in user as follower in following user
-        let user = await User.updateOne({ _id: followingId },
+        await User.findByIdAndUpdate(followingId,
             { $addToSet: { followers: loggedInUserId } }).then(() => console.log("Followers added successully"));
 
         res.status(200).send({ status: 'Success!', user });

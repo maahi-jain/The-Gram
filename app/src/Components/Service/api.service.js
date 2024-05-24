@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 const baseURL = "http://localhost:8080";
 
@@ -38,17 +37,12 @@ export const signUp = async (user) => {
     }
 }
 
-export const createPost = async (post, token) => {
+export const createPost = async (post) => {
     try {
         let formData = new FormData();
         formData.append('content', post.content);
         formData.append('caption', post.caption);
-        let httpOptions = {
-            headers: {
-                Authorization: token
-            }
-        }
-        const res = await axios.post(`${baseURL}/post/`, formData, httpOptions);
+        const res = await axios.post(`${baseURL}/post/`, formData);
         return res.data;
     } catch (error) {
         console.log(error);
@@ -56,12 +50,10 @@ export const createPost = async (post, token) => {
     }
 }
 
-export const getUserList = async (q, token) => {
+export const getUserList = async (q) => {
     try {
         let httpOptions = {
-            headers: {
-                Authorization: token
-            }, params: {
+            params: {
                 q
             }
         }
@@ -73,17 +65,16 @@ export const getUserList = async (q, token) => {
     }
 }
 
-export const getUserPost = async (userId, token) => {
+export const getUserPost = async (userId) => {
     try {
-        let httpOptions = {
-            headers: {
-                Authorization: token
-            }
-        }
-        const res = await axios.get(`${baseURL}/user/${userId}/post`, httpOptions);
+        const res = await axios.get(`${baseURL}/user/${userId}/post`);
         return res.data;
     } catch (error) {
         console.log(error);
         throw error.response.data;
     }
+}
+
+export const follow = (userId) => {
+
 }

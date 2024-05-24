@@ -9,14 +9,13 @@ const CreatePost = ({ open, onClose }) => {
         content: '',
         caption: ''
     });
-    const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState();
     const [successMessage, setSuccessMessage] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createPost(formData, token).then((res) => {
+        createPost(formData).then((res) => {
             setSuccessMessage(res.message);
             setErrorMessage(null);
         }).catch((err) => {
