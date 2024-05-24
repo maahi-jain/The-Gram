@@ -10,10 +10,10 @@ const follow = async (req, res) => {
             { $addToSet: { following: followingId } }).then(() => console.log("following added successfully!"));
 
         // Add logged in user as follower in following user
-        await User.updateOne({ _id: followingId },
+        let user = await User.updateOne({ _id: followingId },
             { $addToSet: { followers: loggedInUserId } }).then(() => console.log("Followers added successully"));
 
-        res.status(200).send({ status: 'Success!' });
+        res.status(200).send({ status: 'Success!', user });
 
     } catch (err) {
         console.log(err.message);
