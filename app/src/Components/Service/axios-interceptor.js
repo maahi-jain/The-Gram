@@ -18,8 +18,8 @@ const responseInterceptor = ({ dispatch }) => {
     return axios.interceptors.response.use(
         (response) => {
             // Do something with the response data
-            if (response?.user) {
-                dispatch(setUser(response.user))
+            if (response?._user) {
+                dispatch(setUser(response._user))
             }
             return response;
         },

@@ -14,10 +14,10 @@ import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
 import UserList from '../UserList';
 
-export default function Profile(props) {
+export default function Profile() {
     const [value, setValue] = React.useState('1');
     const location = useLocation();
-    const searchUser = location.state?.user;
+    const [searchUser, setSearchUser] = useState(location.state?.user);
     const loggedInUser = useSelector(state => state.user);
     const user = searchUser || loggedInUser;
     const [posts, setPosts] = useState();
@@ -35,7 +35,18 @@ export default function Profile(props) {
     const isMobile = useWindowSize();
 
     const followUser = async (user) => {
-        await follow(user._id);
+        let res = await follow(user._id);
+        setSearchUser(res?.searchUser);
+    }
+
+    const unfollowUser = async (user) => {
+        let res = await follow(user._id);
+        setSearchUser(res?.searchUser);
+    }
+
+    const isFollowing = () => {
+        let result = loggedInUser.following.find((user) => user._id === searchUser._id)
+        return result ? true : false;
     }
 
     return (
@@ -47,7 +58,8 @@ export default function Profile(props) {
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
                     {!searchUser && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
-                    {searchUser && <Button className='actionButton' onClick={() => follow(user)} variant='contained'>Follow</Button>}
+                    {searchUser && !isFollowing() && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
+                    {searchUser && isFollowing() && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>

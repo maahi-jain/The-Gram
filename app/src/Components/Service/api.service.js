@@ -75,7 +75,17 @@ export const getUserPost = async (userId) => {
 
 export const follow = async (userId) => {
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/follo /${userId}`);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/follow/${userId}`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
+export const unfollow = async (userId) => {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/unfollow/${userId}`);
         return res.data;
     } catch (error) {
         console.log(error);

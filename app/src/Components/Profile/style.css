@@ -1,11 +1,7 @@
-.profileAvatar.desktop {
-  height: 10%;
-  width: 10%;
-}
-
-.profileAvatar.mobile {
-  height: 25%;
-  width: 25%;
+.profileAvatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 
 .profileDetails {
