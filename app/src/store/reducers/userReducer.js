@@ -4,6 +4,8 @@ const initalState = {
     email: '',
     bio: '',
     profilePic: '',
+    followers: [],
+    following: []
 };
 
 const baseURL = "http://localhost:8080/";
@@ -17,7 +19,9 @@ const userReducer = (state = initalState, action) => {
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,
-                profilePic: baseURL + action.user?.profilePic
+                profilePic: baseURL + action.user?.profilePic,
+                followers: action.user?.followers,
+                following: action.user?.following
             }
         default:
             return state

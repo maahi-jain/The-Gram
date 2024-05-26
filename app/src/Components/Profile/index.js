@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { follow, getUserPost } from '../Service/api.service';
 import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
+import UserList from '../UserList';
 
 export default function Profile(props) {
     const [value, setValue] = React.useState('1');
@@ -54,13 +55,13 @@ export default function Profile(props) {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Tab label="Posts" value="1" />
-                            {/* <Tab label={user.followers.count + "\n followers"} value="2" />
-                            <Tab label={user.following.count + "\n following"} value="3" /> */}
+                            <Tab label={user.followers.length + "\n followers"} value="2" />
+                            <Tab label={user.following.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
                     <TabPanel value="1"><GridPost posts={posts} /></TabPanel>
-                    {/* <TabPanel value="2"><UserList users={userList} /></TabPanel>
-                    <TabPanel value="3"><UserList users={userList} /></TabPanel> */}
+                    <TabPanel value="2"><UserList users={user.followers} /></TabPanel>
+                    <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
             </Box>
         </>

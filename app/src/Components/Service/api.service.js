@@ -77,7 +77,7 @@ export const getUserPost = async (userId) => {
 
 export const follow = async (userId) => {
     try {
-        const res = await axios.get(`${baseURL / user / follow / userId}`);
+        const res = await axios.get(`${baseURL}/user/follo /${userId}`);
         return res.data;
     } catch (error) {
         console.log(error);
