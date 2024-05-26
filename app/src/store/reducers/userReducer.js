@@ -8,8 +8,6 @@ const initalState = {
     following: []
 };
 
-const baseURL = "http://localhost:8080/";
-
 const userReducer = (state = initalState, action) => {
     switch (action.type) {
         case "SET_USER":
@@ -19,7 +17,7 @@ const userReducer = (state = initalState, action) => {
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,
-                profilePic: baseURL + action.user?.profilePic,
+                profilePic: action.user?.profilePic,
                 followers: action.user?.followers,
                 following: action.user?.following
             }

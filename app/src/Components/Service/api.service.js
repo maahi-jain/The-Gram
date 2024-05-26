@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const baseURL = "http://localhost:8080";
-
 export const loginService = async (userIdOrEmail, password) => {
     try {
         const body = {
@@ -9,7 +7,7 @@ export const loginService = async (userIdOrEmail, password) => {
             password
         };
 
-        const res = await axios.post(`${baseURL}/user/login`, body);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/login`, body);
         return res.data;
 
     } catch (error) {
@@ -28,7 +26,7 @@ export const signUp = async (user) => {
         formData.append('email', user.email);
         formData.append('profilePic', user.profilePic);
 
-        const res = await axios.post(`${baseURL}/user/signup`, formData);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/signup`, formData);
         return res.data;
 
     } catch (error) {
@@ -42,7 +40,7 @@ export const createPost = async (post) => {
         let formData = new FormData();
         formData.append('content', post.content);
         formData.append('caption', post.caption);
-        const res = await axios.post(`${baseURL}/post/`, formData);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/post/`, formData);
         return res.data;
     } catch (error) {
         console.log(error);
@@ -57,7 +55,7 @@ export const getUserList = async (q) => {
                 q
             }
         }
-        const res = await axios.get(`${baseURL}/user/`, httpOptions);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/`, httpOptions);
         return res.data;
     } catch (error) {
         console.log(error);
@@ -67,7 +65,7 @@ export const getUserList = async (q) => {
 
 export const getUserPost = async (userId) => {
     try {
-        const res = await axios.get(`${baseURL}/user/${userId}/post`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/${userId}/post`);
         return res.data;
     } catch (error) {
         console.log(error);
@@ -77,7 +75,7 @@ export const getUserPost = async (userId) => {
 
 export const follow = async (userId) => {
     try {
-        const res = await axios.get(`${baseURL}/user/follo /${userId}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/follo /${userId}`);
         return res.data;
     } catch (error) {
         console.log(error);

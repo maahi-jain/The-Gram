@@ -30,7 +30,7 @@ export default function Profile(props) {
         getUserPost(user.userId).then((res) => {
             setPosts(res.posts);
         })
-    }, [])
+    }, [user.userId])
 
     const isMobile = useWindowSize();
 
@@ -41,7 +41,7 @@ export default function Profile(props) {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar alt='profilePic' className={isMobile ? "profileAvatar mobile" : "profileAvatar desktop"} src={user.profilePic} />
+                <Avatar alt='profilePic' src={`${process.env.REACT_APP_API_URL}/${user?.profilePic}`} className={isMobile ? "profileAvatar mobile" : "profileAvatar desktop"} />
                 <div>
                     <div>{user.userId}</div>
                     <div>{user.name}</div>

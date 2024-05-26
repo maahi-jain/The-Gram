@@ -10,12 +10,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const GridPost = ({ posts }) => {
-    const baseURL = 'http://localhost:8080';
     return <>
         {
             posts?.length > 0 && <Grid container direction="row" m={4} spacing={1}>
                 {posts.map((post) => <Grid key={post._id} item s={2}>
-                    <Item><img className="gridImage" alt="user-post" src={`${baseURL}/${post.content}`} /></Item>
+                    <Item><img className="gridImage" alt="user-post" src={`${process.env.REACT_APP_API_URL}/${post.content}`} /></Item>
                 </Grid>)}
             </Grid>
         }
