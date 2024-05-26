@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const requestInterceptor = () => {
+const requestInterceptor = (token) => {
     return axios.interceptors.request.use(
         (config) => {
-            let token = localStorage.getItem('token');
-
             if (token) {
                 config.headers.Authorization = token;
             }
