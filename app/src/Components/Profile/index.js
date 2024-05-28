@@ -9,7 +9,7 @@ import './style.css';
 import useWindowSize from '../../customHooks/useWindowSize';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { follow, getUserPost } from '../Service/api.service';
+import { follow, getUserPost, unfollow } from '../Service/api.service';
 import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
 import UserList from '../UserList';
@@ -18,6 +18,7 @@ export default function Profile() {
     const [value, setValue] = React.useState('1');
     const location = useLocation();
     const [searchUser, setSearchUser] = useState(location.state?.user);
+    const [showFollow, setShowFollow] = useState(true);
     const loggedInUser = useSelector(state => state.user);
     const user = searchUser || loggedInUser;
     const [posts, setPosts] = useState();
@@ -40,14 +41,16 @@ export default function Profile() {
     }
 
     const unfollowUser = async (user) => {
-        let res = await follow(user._id);
+        let res = await unfollow(user._id);
         setSearchUser(res?.searchUser);
     }
 
-    const isFollowing = () => {
-        let result = loggedInUser.following.find((user) => user._id === searchUser._id)
-        return result ? true : false;
-    }
+    useEffect(() => {
+        if (searchUser) {
+            let result = loggedInUser?.following?.find((u) => u._id === searchUser._id)
+            result ? setShowFollow(false) : setShowFollow(true);
+        }
+    }, [searchUser, loggedInUser])
 
     return (
         <>
@@ -58,8 +61,8 @@ export default function Profile() {
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
                     {!searchUser && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
-                    {searchUser && !isFollowing() && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
-                    {searchUser && isFollowing() && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
+                    {searchUser && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
+                    {searchUser && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>

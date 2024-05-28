@@ -6,12 +6,18 @@ const unfollow = async (req, res) => {
         let followingUserId = req.params.userId;
 
         // Remove following user from follow list
-        let user = await User.findByIdAndUpdate(loggedInUserId, { $pull: { following: followingUserId } }, { new: true }).
-            then(() => console.log("Following removed successfully!"));
+        let user = await User.findByIdAndUpdate(loggedInUserId, { $pull: { following: followingUserId } }, { new: true }).populate('followers').populate('following').
+            then((user) => {
+                console.log("Following removed successfully!");
+                return user;
+            });
 
         // Remove loggedIn user from follower list of user
-        let searchUser = await User.findByIdAndUpdate(followingUserId, { $pull: { followers: loggedInUserId } }, { new: true }).
-            then(() => console.log("Follower removed successfully!"));
+        let searchUser = await User.findByIdAndUpdate(followingUserId, { $pull: { followers: loggedInUserId } }, { new: true }).populate('followers').populate('following').
+            then((user) => {
+                console.log("Follower removed successfully!");
+                return user;
+            });
 
         res.status(200).send({ status: 'Success!', _user: user, searchUser });
 

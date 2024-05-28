@@ -7,14 +7,17 @@ const follow = async (req, res) => {
 
         // Add to following of loggedin user
         let user = await User.findByIdAndUpdate(loggedInUserId,
-            { $addToSet: { following: followingId } }, { new: true }).then((user) => {
+            { $addToSet: { following: followingId } }, { new: true }).populate('followers').populate('following').then((user) => {
                 console.log("following added successfully!");
                 return user;
             });
 
         // Add logged in user as follower in following user
         let searchUser = await User.findByIdAndUpdate(followingId,
-            { $addToSet: { followers: loggedInUserId } }).then(() => console.log("Followers added successully"));
+            { $addToSet: { followers: loggedInUserId } }, { new: true }).populate('followers').populate('following').then((user) => {
+                console.log("Followers added successully");
+                return user
+            });
 
         res.status(200).send({ status: 'Success!', _user: user, searchUser });
 

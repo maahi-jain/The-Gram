@@ -79,7 +79,7 @@ export const follow = async (userId) => {
         return res.data;
     } catch (error) {
         console.log(error);
-        throw error.response.data;
+        throw error.response;
     }
 }
 

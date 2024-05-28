@@ -15,7 +15,7 @@ const getUsers = async (req, res) => {
             $and: [
                 { _id: { $ne: loggedInUserId } }
             ]
-        }).skip(0).limit(10);
+        }).populate('followers').populate('following').skip(0).limit(10);
         res.status(200).send({ users: userList })
     } catch (err) {
         console.log(err.message);
