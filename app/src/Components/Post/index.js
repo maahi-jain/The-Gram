@@ -10,17 +10,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Typography } from "@mui/material";
 
 const Post = ({ post }) => {
-    const { url, caption, likes, comments, user, createdAt, mediaType } = post;
+    const { content, caption, likes, comments, user, createdAt, mediaType } = post;
     let postedSince = getSince(createdAt);
     let initials;
-    if (!user.dp) {
+    if (!user.profilePic) {
         initials = getInitials(user.name);
     }
 
     return (
         <Card className="post">
-            <CardHeader avatar={user.dp ? <Avatar src={user.dp} alt="dp" title={user.name} subheader={postedSince} /> : <Avatar label='dp'>{initials}</Avatar>} title={user.name} subheader={postedSince} />
-            <CardMedia component={mediaType} alt="post" src={url} />
+            <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>} title={user.name} subheader={postedSince} />
+            <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
             <CardContent>
                 {caption}
             </CardContent>
@@ -40,6 +40,7 @@ const Post = ({ post }) => {
 
 const getSince = (createdAt) => {
     let currDate = new Date();
+    createdAt = new Date(createdAt);
     let timeDifferenceInSeconds = (currDate - createdAt) / 1000;
     let postedSince;
     if (timeDifferenceInSeconds < 1) {

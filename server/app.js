@@ -4,6 +4,7 @@ import user from "./router/user/index.js";
 import post from "./router/post/index.js"
 import cors from 'cors';
 import 'dotenv/config';
+import refreshToken from "./router/token/refreshToken.js";
 
 const app = express();
 app.use(express.json());
@@ -11,12 +12,9 @@ app.use(cors());
 
 app.use('/uploads', express.static('uploads'));
 app.use("/user", user);
-app.use("/post", post)
+app.use("/post", post);
 
-
-app.get("/", (req, res) => {
-    res.status(200).send("Success!")
-});
+app.post("/refresh-token", refreshToken);
 
 Promise.all([connectToDb()]).then(() => {
     app.listen(8080, () => {

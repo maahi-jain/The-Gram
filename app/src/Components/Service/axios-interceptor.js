@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { setUser } from '../../store/action';
+import { setToken, setUser } from '../../store/action';
+import { refreshToken } from './api.service';
 
 const requestInterceptor = ({ token }) => {
     return axios.interceptors.request.use(
@@ -19,7 +20,8 @@ const responseInterceptor = ({ dispatch }) => {
         async (response) => {
             // Do something with the response data
             if (response?.data?._user) {
-                let action = await setUser(response.data._user)
+                let action = await setUser(response.data._user);
+                updateToken(dispatch, response.data._user);
                 dispatch(action);
             }
             return response;
@@ -30,6 +32,14 @@ const responseInterceptor = ({ dispatch }) => {
         }
     );
 };
+
+const updateToken = async (dispatch, user) => {
+    if (user) {
+        let token = await refreshToken(user);
+        let action = await setToken(token);
+        dispatch(action);
+    }
+}
 
 export { requestInterceptor, responseInterceptor };
 

@@ -92,3 +92,23 @@ export const unfollow = async (userId) => {
         throw error.response.data;
     }
 }
+
+export const getFollowingPost = async () => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/post`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
+export const refreshToken = async (user) => {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/refresh-token`, { user });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
