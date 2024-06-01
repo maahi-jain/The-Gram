@@ -16,7 +16,6 @@ import Search from './components/Search';
 import Protected from './components/Protected';
 import Signup from './components/Signup';
 import { useSelector } from 'react-redux';
-import useInterceptor from './customHooks/useInterceptor';
 import { requestInterceptor, responseInterceptor } from './components/Service/axios-interceptor';
 
 const App = () => {
@@ -24,8 +23,8 @@ const App = () => {
   const [logoutDialog, setLogoutDialog] = useState(false);
   const [createPost, setCreatePost] = useState(false);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  useInterceptor(requestInterceptor);
-  useInterceptor(responseInterceptor);
+  requestInterceptor();
+  responseInterceptor();
 
   const onLogout = (open) => {
     setLogoutDialog(open);
