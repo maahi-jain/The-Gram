@@ -28,6 +28,10 @@ export default function Profile() {
     };
 
     useEffect(() => {
+        setSearchUser(location.state?.user);
+    }, [location.state?.user]);
+
+    useEffect(() => {
         getUserPost(user.userId).then((res) => {
             setPosts(res.posts);
         })

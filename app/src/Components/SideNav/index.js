@@ -19,7 +19,7 @@ const SideNav = ({ onLogout, onCreatePost }) => {
     const menuItems = {
         'Home': [<HomeIcon />, "/home"],
         'Search': [<SearchOutlinedIcon />, "/search"],
-        'My Profile': [<PersonIcon />, "profile"],
+        'My Profile': [<PersonIcon />, "/profile"],
     }
 
     return (
