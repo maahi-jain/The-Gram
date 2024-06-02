@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import "./style.css";
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Typography } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { addLike, unlike } from "../Service/api.service";
+import "./style.css";
 
 const Post = ({ post }) => {
     const { content, caption, likes, comments, user, createdAt } = post;

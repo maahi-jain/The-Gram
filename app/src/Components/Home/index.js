@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./style.css";
 import Post from "../Post";
-import dp from "../../assets/profilePic.jpeg"
 import { getFollowingPost } from "../Service/api.service";
+import "./style.css";
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
