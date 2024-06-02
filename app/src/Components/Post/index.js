@@ -43,7 +43,7 @@ const Post = ({ post }) => {
             </CardContent>
             <CardActions>
                 <IconButton aria-label="Add to Fav" onClick={updateLike}>
-                    <FavoriteIcon className={liked && 'like'} />
+                    <FavoriteIcon className={liked ? 'like' : 'unlike'} />
                 </IconButton>
             </CardActions>
             <CardContent id="likes">
