@@ -1,8 +1,7 @@
 import { Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
-import React, { useState } from "react"
-import { createPost } from "../Service/api.service.js";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { createPost } from "../Service/api.service.js";
 
 const CreatePost = ({ open, onClose }) => {
     const [formData, setFormData] = useState({
