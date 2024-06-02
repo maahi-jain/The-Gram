@@ -55,7 +55,7 @@ const Signup = () => {
                 <CardContent>
                     <form onSubmit={handleSubmit} enctype="multipart/form-data">
                         <div className="input">
-                            <TextField type="file" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" />
+                            <TextField type="file" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" focused />
                         </div>
                         <div className="input">
                             <TextField type="text" name="phoneNumber" onChange={handleInputChange} required label="Mobile Number" variant="outlined" />
