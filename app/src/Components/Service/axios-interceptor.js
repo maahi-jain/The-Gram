@@ -25,7 +25,7 @@ const responseInterceptor = () => {
             // Do something with the response data
             if (response?.data?._user) {
                 let action = await setUser(response.data._user);
-                updateToken(dispatch, response.data._user);
+                updateToken(response.data._user);
                 dispatch(action);
             }
             return response;
@@ -39,8 +39,8 @@ const responseInterceptor = () => {
 
 const updateToken = async (user) => {
     if (user) {
-        let token = await refreshToken(user);
-        let action = await setToken(token);
+        let response = await refreshToken(user);
+        let action = await setToken(response.token);
         dispatch(action);
     }
 }
