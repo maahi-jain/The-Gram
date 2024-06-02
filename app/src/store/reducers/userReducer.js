@@ -1,4 +1,5 @@
 const initalState = {
+    _id: '',
     userId: '',
     name: '',
     email: '',
@@ -13,6 +14,7 @@ const userReducer = (state = initalState, action) => {
         case "SET_USER":
             return {
                 ...state,
+                _id: action.user?._id,
                 email: action.user?.email,
                 userId: action.user?.userId,
                 name: action.user?.name,

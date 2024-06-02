@@ -8,13 +8,22 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const Post = ({ post }) => {
-    const { content, caption, likes, comments, user, createdAt, mediaType } = post;
+    const { content, caption, likes, comments, user, createdAt } = post;
+    const loggedInUserId = useSelector((state) => state.user._id)
     let postedSince = getSince(createdAt);
     let initials;
     if (!user.profilePic) {
         initials = getInitials(user.name);
+    }
+
+    const isLiked = () => {
+        if (likes?.includes(loggedInUserId)) {
+            return true;
+        }
+        return false;
     }
 
     return (
@@ -26,12 +35,12 @@ const Post = ({ post }) => {
             </CardContent>
             <CardActions>
                 <IconButton aria-label="Add to Fav">
-                    <FavoriteIcon />
+                    <FavoriteIcon className={isLiked() && 'like'} />
                 </IconButton>
             </CardActions>
             <CardContent id="likes">
                 <Typography variant="subtitle2" gutterBottom>
-                    {likes} likes
+                    {likes?.length || 0} likes
                 </Typography>
             </CardContent>
         </Card>
@@ -66,6 +75,8 @@ const getInitials = (userName) => {
     });
     return initials;
 }
+
+
 
 export default Post;
 
