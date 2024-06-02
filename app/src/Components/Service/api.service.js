@@ -112,3 +112,24 @@ export const refreshToken = async (user) => {
         throw error.response.data;
     }
 }
+
+export const addLike = async (id) => {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/post/${id}/like`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
+export const unlike = async (id) => {
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/post/${id}/unlike`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+

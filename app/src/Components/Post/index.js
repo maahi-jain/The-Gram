@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -9,21 +9,29 @@ import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { addLike, unlike } from "../Service/api.service";
 
 const Post = ({ post }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
-    const loggedInUserId = useSelector((state) => state.user._id)
+    const loggedInUserId = useSelector((state) => state.user._id);
+    const [liked, setLiked] = useState(likes.includes(loggedInUserId));
+    const [likeCount, setLikeCount] = useState(likes.length);
     let postedSince = getSince(createdAt);
     let initials;
     if (!user.profilePic) {
         initials = getInitials(user.name);
     }
 
-    const isLiked = () => {
-        if (likes?.includes(loggedInUserId)) {
-            return true;
+    const updateLike = async () => {
+        if (liked) {
+            await unlike(post._id);
+            setLiked(false);
+            setLikeCount(likeCount - 1);
+        } else {
+            await addLike(post._id);
+            setLiked(true);
+            setLikeCount(likeCount + 1);
         }
-        return false;
     }
 
     return (
@@ -34,13 +42,13 @@ const Post = ({ post }) => {
                 {caption}
             </CardContent>
             <CardActions>
-                <IconButton aria-label="Add to Fav">
-                    <FavoriteIcon className={isLiked() && 'like'} />
+                <IconButton aria-label="Add to Fav" onClick={updateLike}>
+                    <FavoriteIcon className={liked && 'like'} />
                 </IconButton>
             </CardActions>
             <CardContent id="likes">
                 <Typography variant="subtitle2" gutterBottom>
-                    {likes?.length || 0} likes
+                    {likeCount} likes
                 </Typography>
             </CardContent>
         </Card>
