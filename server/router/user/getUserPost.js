@@ -5,7 +5,7 @@ const getUserPost = async (req, res) => {
     try {
         let userId = req.params.userId;
         let user = await User.findOne({ userId });
-        let posts = await Post.find({ user: user._id });
+        let posts = await Post.find({ user: user._id }).populate('user', 'name profilePic');
         return res.status(200).send({ posts: posts });
     } catch (err) {
         console.log(err.message);
