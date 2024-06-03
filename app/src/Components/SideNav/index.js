@@ -14,6 +14,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Divider, List, Toolbar } from "@mui/material";
 
+import "./style.css";
+
 const SideNav = ({ onLogout, onCreatePost }) => {
     // Menu Items
     const menuItems = {
@@ -29,7 +31,7 @@ const SideNav = ({ onLogout, onCreatePost }) => {
                 {Object.keys(menuItems).map((key) => {
                     return <div key={key}>
                         <ListItem key={key}>
-                            <Link to={menuItems[key][1]}>
+                            <Link to={menuItems[key][1]} className="navLink">
                                 <ListItemButton>
                                     <ListItemIcon>
                                         {menuItems[key][0]}

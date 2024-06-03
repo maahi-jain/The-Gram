@@ -64,9 +64,9 @@ export default function Profile() {
                     <div>{user.userId}</div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
-                    {!searchUser && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
-                    {searchUser && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
-                    {searchUser && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
+                    {(!searchUser || searchUser._id === loggedInUser._id) && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
+                    {searchUser && searchUser._id !== loggedInUser._id && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
+                    {searchUser && searchUser._id !== loggedInUser._id && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -74,8 +74,8 @@ export default function Profile() {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Tab label="Posts" value="1" />
-                            <Tab label={user.followers.length + "\n followers"} value="2" />
-                            <Tab label={user.following.length + "\n following"} value="3" />
+                            <Tab label={user.followers?.length + "\n followers"} value="2" />
+                            <Tab label={user.following?.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
                     <TabPanel value="1"><GridPost posts={posts} /></TabPanel>

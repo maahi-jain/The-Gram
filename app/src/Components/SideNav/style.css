@@ -3,3 +3,8 @@
   flex-shrink: 0;
   box-sizing: border-box;
 }
+
+.navLink {
+  text-decoration: none; /* Remove underline */
+  color: inherit;
+}

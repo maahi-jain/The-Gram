@@ -48,6 +48,16 @@ export const createPost = async (post) => {
     }
 }
 
+export const getUserDetails = async (id) => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
 export const getUserList = async (q) => {
     try {
         let httpOptions = {
