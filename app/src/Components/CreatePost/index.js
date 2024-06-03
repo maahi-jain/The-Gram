@@ -17,11 +17,15 @@ const CreatePost = ({ open, onClose }) => {
         createPost(formData).then((res) => {
             setSuccessMessage(res.message);
             setErrorMessage(null);
+            setTimeout(() => {
+                onClose(false);
+                navigate("/");
+                setSuccessMessage(null);
+            }, 2000);
         }).catch((err) => {
             setErrorMessage(err.message);
             setSuccessMessage(null);
         });
-        setTimeout(navigate("/"), 2000);
     }
 
     const handleInputChange = (event) => {
@@ -54,8 +58,8 @@ const CreatePost = ({ open, onClose }) => {
                         <Button type="submit" variant="contained">Create</Button>
                     </div>
                 </form>
-                {errorMessage && <p>{errorMessage}</p>}
-                {successMessage && <p>{successMessage}</p>}
+                {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+                {successMessage && <p className="successMessage">{successMessage}</p>}
             </DialogContent>
         </Dialog>
     )

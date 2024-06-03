@@ -24,3 +24,11 @@
   margin-left: 20%;
   margin-top: 10%;
 }
+
+.successMessage {
+  color: green;
+}
+
+.errorMessage {
+  color: red;
+}
