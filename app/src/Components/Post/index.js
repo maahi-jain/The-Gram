@@ -14,7 +14,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./style.css";
 
-const Post = ({ post, myProfile }) => {
+const Post = ({ post, myProfile, refreshPost, close }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
     const loggedInUserId = useSelector((state) => state.user._id);
     const [liked, setLiked] = useState(likes.includes(loggedInUserId));
@@ -39,7 +39,6 @@ const Post = ({ post, myProfile }) => {
 
     // My post edit-delete
     const [anchorEl, setAnchorEl] = useState(null);
-    const [actionPost, setActionPost] = useState(null);
     const open = Boolean(anchorEl);
     const [deleteDialog, setDeleteDialog] = useState(false);
 
@@ -49,13 +48,14 @@ const Post = ({ post, myProfile }) => {
     const closeMenu = () => {
         setAnchorEl(null);
     };
-    const deletePost = (post) => {
-        setActionPost(post)
+    const deletePost = () => {
         setDeleteDialog(true);
     }
     const confirmDeletePost = async () => {
-        await deletePostAPI(actionPost._id);
+        await deletePostAPI(post._id);
         setDeleteDialog(false);
+        refreshPost();
+        close();
     }
     const editPost = () => {
         console.log("Edit");

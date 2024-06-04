@@ -11,7 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const GridPost = ({ posts, myProfile }) => {
+const GridPost = ({ posts, myProfile, refreshPost }) => {
     const [openPost, setOpenPost] = useState(false);
     const [openedPost, setOpenedPost] = useState({});
     const handleClick = (post) => {
@@ -32,7 +32,7 @@ const GridPost = ({ posts, myProfile }) => {
         }
         <Dialog className="myPostDialog" open={openPost} onClose={close}>
             <DialogContent className="myPostContent">
-                <Post myProfile={myProfile} post={openedPost}></Post>
+                <Post myProfile={myProfile} post={openedPost} refreshPost={refreshPost} close={close}></Post>
             </DialogContent>
         </Dialog>
     </>

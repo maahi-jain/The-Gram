@@ -30,18 +30,19 @@ export default function Profile() {
 
     useEffect(() => {
         setMyProfile(!searchUser || searchUser._id === loggedInUser._id);
-        console.log(myProfile);
     }, [searchUser, loggedInUser]);
 
     useEffect(() => {
         setSearchUser(location.state?.user);
     }, [location.state?.user]);
 
-    useEffect(() => {
+    useEffect(() => { getPost() }, [user.userId])
+
+    const getPost = () => {
         getUserPost(user.userId).then((res) => {
             setPosts(res.posts);
         })
-    }, [user.userId])
+    }
 
     const isMobile = useWindowSize();
 
@@ -84,7 +85,7 @@ export default function Profile() {
                             <Tab label={user.following?.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1"><GridPost posts={posts} myProfile={myProfile} /></TabPanel>
+                    <TabPanel value="1"><GridPost posts={posts} myProfile={myProfile} refreshPost={getPost} /></TabPanel>
                     <TabPanel value="2"><UserList users={user.followers} /></TabPanel>
                     <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
