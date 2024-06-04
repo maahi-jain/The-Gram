@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import React from "react";
 import Post from "../Post";
+import "./style.css";
 
 const MyPost = ({ open, onClose, post }) => {
 
@@ -9,8 +10,8 @@ const MyPost = ({ open, onClose, post }) => {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose}>
-            <DialogContent>
+        <Dialog className="myPostDialog" open={open} onClose={handleClose}>
+            <DialogContent className="myPostContent">
                 <Post post={post}></Post>
             </DialogContent>
         </Dialog>

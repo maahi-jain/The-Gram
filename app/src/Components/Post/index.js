@@ -9,6 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { addLike, unlike } from "../Service/api.service";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "./style.css";
 
 const Post = ({ post }) => {
@@ -36,7 +37,14 @@ const Post = ({ post }) => {
 
     return (
         <Card className="post">
-            <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>} title={user.name} subheader={postedSince} />
+            <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>}
+                title={user.name}
+                subheader={postedSince}
+                action={
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                    </IconButton>
+                } />
             <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
             <CardContent>
                 {caption}
