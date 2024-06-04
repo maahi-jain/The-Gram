@@ -143,9 +143,19 @@ export const unlike = async (id) => {
     }
 }
 
-export const deletePostAPI = async (id) => {
+export const removePost = async (id) => {
     try {
         const res = await axios.delete(`${process.env.REACT_APP_API_URL}/post/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+
+export const updatePost = async (id, caption) => {
+    try {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/post/${id}`, { caption });
         return res.data;
     } catch (error) {
         console.log(error);

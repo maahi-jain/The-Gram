@@ -1,5 +1,5 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Button, Dialog, DialogActions, DialogContent, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, IconButton, Input, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,7 +8,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { addLike, deletePostAPI, unlike } from "../Service/api.service";
+import { addLike, removePost, unlike, updatePost } from "../Service/api.service";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,6 +16,7 @@ import "./style.css";
 
 const Post = ({ post, myProfile, refreshPost, close }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
+    const [cardContent, setCardContent] = useState(caption);
     const loggedInUserId = useSelector((state) => state.user._id);
     const [liked, setLiked] = useState(likes.includes(loggedInUserId));
     const [likeCount, setLikeCount] = useState(likes.length);
@@ -41,6 +42,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [deleteDialog, setDeleteDialog] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     const openMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -52,13 +54,19 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
         setDeleteDialog(true);
     }
     const confirmDeletePost = async () => {
-        await deletePostAPI(post._id);
+        await removePost(post._id);
         setDeleteDialog(false);
         refreshPost();
         close();
     }
     const editPost = () => {
-        console.log("Edit");
+        setEditMode(true);
+        setAnchorEl(null);
+    }
+    const confirmEdit = async () => {
+        await updatePost(post._id, cardContent);
+        setEditMode(false);
+        refreshPost();
     }
     const closeDeleteDialog = () => {
         setDeleteDialog(false);
@@ -77,7 +85,8 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
                     } />
                 <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
                 <CardContent>
-                    {caption}
+                    {!editMode && cardContent}
+                    {editMode && <div><Input value={cardContent} onChange={(event) => setCardContent(event.target.value)} /><Button variant='contained' onClick={confirmEdit}>Save</Button></div>}
                 </CardContent>
                 <CardActions>
                     <IconButton aria-label="Add to Fav" onClick={updateLike}>
