@@ -1,5 +1,5 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IconButton, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,11 +8,13 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { addLike, unlike } from "../Service/api.service";
+import { addLike, deletePostAPI, unlike } from "../Service/api.service";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import "./style.css";
 
-const Post = ({ post }) => {
+const Post = ({ post, myProfile }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
     const loggedInUserId = useSelector((state) => state.user._id);
     const [liked, setLiked] = useState(likes.includes(loggedInUserId));
@@ -35,31 +37,77 @@ const Post = ({ post }) => {
         }
     }
 
+    // My post edit-delete
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [actionPost, setActionPost] = useState(null);
+    const open = Boolean(anchorEl);
+    const [deleteDialog, setDeleteDialog] = useState(false);
+
+    const openMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const closeMenu = () => {
+        setAnchorEl(null);
+    };
+    const deletePost = (post) => {
+        setActionPost(post)
+        setDeleteDialog(true);
+    }
+    const confirmDeletePost = async () => {
+        await deletePostAPI(actionPost._id);
+        setDeleteDialog(false);
+    }
+    const editPost = () => {
+        console.log("Edit");
+    }
+    const closeDeleteDialog = () => {
+        setDeleteDialog(false);
+    }
+
     return (
-        <Card className="post">
-            <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>}
-                title={user.name}
-                subheader={postedSince}
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
+        <>
+            <Card className="post">
+                <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>}
+                    title={user.name}
+                    subheader={postedSince}
+                    action={
+                        myProfile && <IconButton onClick={openMenu} aria-label="settings">
+                            <MoreVertIcon />
+                        </IconButton>
+                    } />
+                <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
+                <CardContent>
+                    {caption}
+                </CardContent>
+                <CardActions>
+                    <IconButton aria-label="Add to Fav" onClick={updateLike}>
+                        <FavoriteIcon className={liked ? 'like' : 'unlike'} />
                     </IconButton>
-                } />
-            <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
-            <CardContent>
-                {caption}
-            </CardContent>
-            <CardActions>
-                <IconButton aria-label="Add to Fav" onClick={updateLike}>
-                    <FavoriteIcon className={liked ? 'like' : 'unlike'} />
-                </IconButton>
-            </CardActions>
-            <CardContent id="likes">
-                <Typography variant="subtitle2" gutterBottom>
-                    {likeCount} likes
-                </Typography>
-            </CardContent>
-        </Card>
+                </CardActions>
+                <CardContent id="likes">
+                    <Typography variant="subtitle2" gutterBottom>
+                        {likeCount} likes
+                    </Typography>
+                </CardContent>
+            </Card>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={closeMenu}
+            >
+                <MenuItem onClick={editPost}><ListItemIcon><EditIcon /></ListItemIcon><ListItemText>Edit</ListItemText></MenuItem>
+                <MenuItem onClick={deletePost}><ListItemIcon><DeleteIcon /></ListItemIcon><ListItemText>Delete</ListItemText></MenuItem>
+            </Menu>
+            {<Dialog open={deleteDialog}>
+                <DialogContent>
+                    Do you want to delete this Post?
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={confirmDeletePost}>Yes</Button>
+                    <Button onClick={closeDeleteDialog}>No</Button>
+                </DialogActions>
+            </Dialog>}
+        </>
     )
 }
 

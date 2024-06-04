@@ -143,3 +143,13 @@ export const unlike = async (id) => {
     }
 }
 
+export const deletePostAPI = async (id) => {
+    try {
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/post/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+

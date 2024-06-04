@@ -1,6 +1,6 @@
-import { Grid, Paper, styled } from "@mui/material"
+import { Dialog, DialogContent, Grid, Paper, styled } from "@mui/material"
 import "./style.css";
-import MyPost from "../MyPost";
+import Post from "../Post";
 import { useState } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -11,7 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const GridPost = ({ posts }) => {
+const GridPost = ({ posts, myProfile }) => {
     const [openPost, setOpenPost] = useState(false);
     const [openedPost, setOpenedPost] = useState({});
     const handleClick = (post) => {
@@ -30,7 +30,11 @@ const GridPost = ({ posts }) => {
             </Grid>)}
         </Grid>
         }
-        <MyPost open={openPost} onClose={close} post={openedPost} />
+        <Dialog className="myPostDialog" open={openPost} onClose={close}>
+            <DialogContent className="myPostContent">
+                <Post myProfile={myProfile} post={openedPost}></Post>
+            </DialogContent>
+        </Dialog>
     </>
 }
 

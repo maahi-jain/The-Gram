@@ -19,6 +19,7 @@ export default function Profile() {
     const location = useLocation();
     const [searchUser, setSearchUser] = useState(location.state?.user);
     const [showFollow, setShowFollow] = useState(true);
+    const [myProfile, setMyProfile] = useState(false);
     const loggedInUser = useSelector(state => state.user);
     const user = searchUser || loggedInUser;
     const [posts, setPosts] = useState();
@@ -26,6 +27,11 @@ export default function Profile() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        setMyProfile(!searchUser || searchUser._id === loggedInUser._id);
+        console.log(myProfile);
+    }, [searchUser, loggedInUser]);
 
     useEffect(() => {
         setSearchUser(location.state?.user);
@@ -64,9 +70,9 @@ export default function Profile() {
                     <div>{user.userId}</div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
-                    {(!searchUser || searchUser._id === loggedInUser._id) && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
-                    {searchUser && searchUser._id !== loggedInUser._id && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
-                    {searchUser && searchUser._id !== loggedInUser._id && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
+                    {myProfile && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
+                    {!myProfile && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
+                    {!myProfile && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
                 </div>
             </div>
             <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -78,7 +84,7 @@ export default function Profile() {
                             <Tab label={user.following?.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1"><GridPost posts={posts} /></TabPanel>
+                    <TabPanel value="1"><GridPost posts={posts} myProfile={myProfile} /></TabPanel>
                     <TabPanel value="2"><UserList users={user.followers} /></TabPanel>
                     <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
