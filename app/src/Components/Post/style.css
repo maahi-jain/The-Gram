@@ -12,3 +12,8 @@
 .like {
   color: red;
 }
+
+.editCaption {
+  display: flex;
+  justify-content: space-between;
+}

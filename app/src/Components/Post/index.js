@@ -86,7 +86,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
                 <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
                 <CardContent>
                     {!editMode && cardContent}
-                    {editMode && <div><Input value={cardContent} onChange={(event) => setCardContent(event.target.value)} /><Button variant='contained' onClick={confirmEdit}>Save</Button></div>}
+                    {editMode && <div className='editCaption'><Input value={cardContent} onChange={(event) => setCardContent(event.target.value)} /><Button variant='contained' onClick={confirmEdit}>Save</Button></div>}
                 </CardContent>
                 <CardActions>
                     <IconButton aria-label="Add to Fav" onClick={updateLike}>
