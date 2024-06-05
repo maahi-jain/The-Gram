@@ -16,6 +16,7 @@ const userReducer = (state = initalState, action) => {
                 ...state,
                 _id: action.user?._id,
                 email: action.user?.email,
+                phoneNumber: action.user?.phoneNumber,
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,

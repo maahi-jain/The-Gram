@@ -163,3 +163,13 @@ export const updatePost = async (id, caption) => {
     }
 }
 
+export const updateUser = async (id, user) => {
+    try {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/${id}`, { user });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response.data;
+    }
+}
+

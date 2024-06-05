@@ -8,6 +8,7 @@ import getUsers from "./getUsers.js";
 import follow from "./follow.js";
 import unfollow from "./unfollow.js";
 import getUserDetails from "./getUserDetails.js";
+import EditUser from "./editUser.js";
 const upload = multer({ dest: 'uploads/profilePic' });
 
 const router = Router();
@@ -19,5 +20,6 @@ router.get("/:id", authenticate, getUserDetails)
 router.get("/", authenticate, getUsers);
 router.post("/follow/:userId", authenticate, follow);
 router.post("/unfollow/:userId", authenticate, unfollow);
+router.put("/:id", authenticate, EditUser);
 
 export default router;

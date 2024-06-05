@@ -67,6 +67,9 @@ const Signup = () => {
                             <TextField type="text" name="userId" onChange={handleInputChange} required label="userId" variant="outlined" />
                         </div>
                         <div className="input">
+                            <TextField type="text" name="bio" onChange={handleInputChange} required label="Bio" variant="outlined" />
+                        </div>
+                        <div className="input">
                             <TextField type="email" name="email" onChange={handleInputChange} required label="Email" variant="outlined" />
                         </div>
                         <div className="input">

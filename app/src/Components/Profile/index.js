@@ -13,6 +13,7 @@ import { follow, getUserPost, unfollow } from '../Service/api.service';
 import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
 import UserList from '../UserList';
+import EditProfile from '../EditProfile';
 
 export default function Profile() {
     const [value, setValue] = React.useState('1');
@@ -21,12 +22,16 @@ export default function Profile() {
     const [showFollow, setShowFollow] = useState(true);
     const [myProfile, setMyProfile] = useState(false);
     const loggedInUser = useSelector(state => state.user);
-    const user = searchUser || loggedInUser;
+    let user = searchUser || loggedInUser;
     const [posts, setPosts] = useState();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        user = searchUser || loggedInUser;
+    }, [])
 
     useEffect(() => {
         setMyProfile(!searchUser || searchUser._id === loggedInUser._id);
@@ -63,15 +68,26 @@ export default function Profile() {
         }
     }, [searchUser, loggedInUser])
 
+
+    // Edit profile
+    const [editProfile, setEditProfile] = useState(false);
+
+    const openEditProfile = () => {
+        setEditProfile(true);
+    }
+
+    const closeEditProfile = () => {
+        setEditProfile(false);
+    }
+
     return (
         <>
             <div className='profileDetails'>
                 <Avatar alt='profilePic' src={`${process.env.REACT_APP_API_URL}/${user?.profilePic}`} className={isMobile ? "profileAvatar mobile" : "profileAvatar desktop"} />
                 <div>
-                    <div>{user.userId}</div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
-                    {myProfile && <Button className='actionButton' variant='contained'>Edit Profile</Button>}
+                    {myProfile && <Button className='actionButton' variant='contained' onClick={openEditProfile}>Edit Profile</Button>}
                     {!myProfile && showFollow && <Button className='actionButton' onClick={() => followUser(user)} variant='contained'>Follow</Button>}
                     {!myProfile && !showFollow && <Button className='actionButton' onClick={() => unfollowUser(user)} variant='contained'>Unfollow</Button>}
                 </div>
@@ -90,6 +106,7 @@ export default function Profile() {
                     <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
             </Box>
+            <EditProfile open={editProfile} onClose={closeEditProfile} />
         </>
     );
 }

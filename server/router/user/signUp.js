@@ -11,7 +11,8 @@ const signUp = async (req, res) => {
             password: hashedPassword,
             phoneNumber: body.phoneNumber,
             email: body.email,
-            profilePic: req.file.path
+            profilePic: req.file.path,
+            bio: body.bio
         });
 
         User.create(user).then((result) => {
