@@ -81,7 +81,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} />
+                <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>

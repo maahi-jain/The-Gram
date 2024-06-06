@@ -61,7 +61,7 @@ const EditProfile = ({ open, onClose }) => {
         }}>
             <DialogTitle>Update Post</DialogTitle>
             <DialogContent>
-                <Avatar id="profileImage" alt="profile" src={imageSrc} onClick={changeProfile} />
+                <Avatar id="profileImage" src={imageSrc} onClick={changeProfile} />
                 <form onSubmit={handleSubmit}>
                     <div className="input" id="profileInputContainer">
                         <TextField type="file" name="profilePic" id="profileInput" onChange={handleInputChange} />

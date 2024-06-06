@@ -71,7 +71,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
     return (
         <>
             <Card className="post">
-                <CardHeader avatar={<Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} />}
+                <CardHeader avatar={<Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} subheader={postedSince} />}
                     title={user.name}
                     subheader={postedSince}
                     action={
