@@ -4,7 +4,21 @@
 }
 
 .editProfileDialog {
-  position: absolute;
-  top: 3%;
   height: 70vh; /* Set your desired height here */
+}
+
+#profileImage {
+  justify-content: center;
+  padding-bottom: 4%;
+}
+
+.profileImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.profileEditIcon {
+  background-color: rgb(183, 181, 181);
+  border-radius: 50%;
+  padding: 3px;
 }

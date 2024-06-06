@@ -1,7 +1,8 @@
-import { Avatar, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { Avatar, Badge, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { updateUser } from "../Service/api.service.js";
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import "./style.css";
 
 const EditProfile = ({ open, onClose }) => {
@@ -61,7 +62,12 @@ const EditProfile = ({ open, onClose }) => {
         }}>
             <DialogTitle>Update Post</DialogTitle>
             <DialogContent>
-                <Avatar id="profileImage" src={imageSrc} onClick={changeProfile} />
+                <div className="profileImageContainer">
+                    <Badge badgeContent={<ModeEditOutlinedIcon className="profileEditIcon" />} overlap="circular"
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                        <Avatar id="profileImage" sx={{ height: '100px', width: '100px' }} src={imageSrc} onClick={changeProfile} />
+                    </Badge>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <div className="input" id="profileInputContainer">
                         <TextField type="file" name="profilePic" id="profileInput" onChange={handleInputChange} />
