@@ -5,7 +5,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Avatar, Button } from '@mui/material';
-import './style.css';
 import useWindowSize from '../../customHooks/useWindowSize';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -14,6 +13,8 @@ import GridPost from '../GridPost';
 import { useLocation } from 'react-router-dom';
 import UserList from '../UserList';
 import EditProfile from '../EditProfile';
+import './style.css';
+import { getInitials } from '../Service/utils';
 
 export default function Profile() {
     const [value, setValue] = React.useState('1');
@@ -23,6 +24,7 @@ export default function Profile() {
     const [myProfile, setMyProfile] = useState(false);
     const loggedInUser = useSelector(state => state.user);
     let user = searchUser || loggedInUser;
+    let initials = getInitials(user.name);
     const [posts, setPosts] = useState();
 
     const handleChange = (event, newValue) => {
@@ -31,6 +33,7 @@ export default function Profile() {
 
     useEffect(() => {
         user = searchUser || loggedInUser;
+        initials = getInitials(user.name)
     }, [])
 
     useEffect(() => {
@@ -48,8 +51,6 @@ export default function Profile() {
             setPosts(res.posts);
         })
     }
-
-    const isMobile = useWindowSize();
 
     const followUser = async (user) => {
         let res = await follow(user._id);
@@ -83,7 +84,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar alt='profilePic' src={`${process.env.REACT_APP_API_URL}/${user?.profilePic}`} className={isMobile ? "profileAvatar mobile" : "profileAvatar desktop"} />
+                {user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} /> : <Avatar label='profilePic'>{initials}</Avatar>}
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>

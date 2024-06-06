@@ -21,6 +21,7 @@ export const signUp = async (user) => {
         let formData = new FormData();
         formData.append('name', user.name);
         formData.append('userId', user.userId);
+        formData.append('bio', user.bio);
         formData.append('password', user.password);
         formData.append('phoneNumber', user.phoneNumber);
         formData.append('email', user.email);
@@ -165,7 +166,13 @@ export const updatePost = async (id, caption) => {
 
 export const updateUser = async (id, user) => {
     try {
-        const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/${id}`, { user });
+        let formData = new FormData();
+        formData.append('name', user.name);
+        formData.append('bio', user.bio);
+        formData.append('phoneNumber', user.phoneNumber);
+        formData.append('email', user.email);
+        user.profilePic && formData.append('profilePic', user.profilePic);
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/${id}`, formData);
         return res.data;
     } catch (error) {
         console.log(error);

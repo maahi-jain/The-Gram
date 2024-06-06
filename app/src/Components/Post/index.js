@@ -13,6 +13,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./style.css";
+import { getInitials } from '../Service/utils';
 
 const Post = ({ post, myProfile, refreshPost, close }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
@@ -139,16 +140,6 @@ const getSince = (createdAt) => {
 
     return postedSince;
 }
-
-const getInitials = (userName) => {
-    let name = userName.split(" ");
-    let initials = "";
-    name.forEach((elem) => {
-        initials += elem.substring(0, 1).toUpperCase();
-    });
-    return initials;
-}
-
 
 
 export default Post;
