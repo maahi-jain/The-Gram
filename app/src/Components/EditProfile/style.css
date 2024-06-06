@@ -21,4 +21,7 @@
   background-color: rgb(183, 181, 181);
   border-radius: 50%;
   padding: 3px;
+  color: white;
+  height: 15px;
+  width: 15px;
 }
