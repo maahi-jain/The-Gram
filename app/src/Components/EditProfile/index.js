@@ -56,7 +56,9 @@ const EditProfile = ({ open, onClose }) => {
     }
 
     return (
-        <Dialog open={open} onClose={() => onClose(false)}>
+        <Dialog open={open} onClose={() => onClose(false)} PaperProps={{
+            className: 'editProfileDialog',
+        }}>
             <DialogTitle>Update Post</DialogTitle>
             <DialogContent>
                 <Avatar id="profileImage" alt="profile" src={imageSrc} onClick={changeProfile} />

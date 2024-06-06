@@ -13,7 +13,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./style.css";
-import { getInitials } from '../Service/utils';
 
 const Post = ({ post, myProfile, refreshPost, close }) => {
     const { content, caption, likes, comments, user, createdAt } = post;
@@ -22,10 +21,6 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
     const [liked, setLiked] = useState(likes.includes(loggedInUserId));
     const [likeCount, setLikeCount] = useState(likes.length);
     let postedSince = getSince(createdAt);
-    let initials;
-    if (!user.profilePic) {
-        initials = getInitials(user.name);
-    }
 
     const updateLike = async () => {
         if (liked) {
@@ -76,7 +71,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
     return (
         <>
             <Card className="post">
-                <CardHeader avatar={user.profilePic ? <Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} /> : <Avatar label='profilePic'>{initials}</Avatar>}
+                <CardHeader avatar={<Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} alt="profilePic" title={user.name} subheader={postedSince} />}
                     title={user.name}
                     subheader={postedSince}
                     action={

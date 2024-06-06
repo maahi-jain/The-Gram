@@ -5,10 +5,10 @@
   cursor: pointer;
 }
 
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+.myPostDialog {
   position: absolute;
-  top: 12%;
-  height: 80%;
+  top: 3%;
+  height: 70vh; /* Set your desired height here */
 }
 
 .MuiDialogTitle-root + .css-ypiqx9-MuiDialogContent-root {

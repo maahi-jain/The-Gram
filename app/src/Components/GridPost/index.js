@@ -30,7 +30,9 @@ const GridPost = ({ posts, myProfile, refreshPost }) => {
             </Grid>)}
         </Grid>
         }
-        <Dialog className="myPostDialog" open={openPost} onClose={close}>
+        <Dialog PaperProps={{
+            className: 'myPostDialog',
+        }} open={openPost} onClose={close}>
             <DialogContent className="myPostContent">
                 <Post myProfile={myProfile} post={openedPost} refreshPost={refreshPost} close={close}></Post>
             </DialogContent>

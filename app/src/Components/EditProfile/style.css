@@ -2,3 +2,9 @@
 #profileInput {
   display: none;
 }
+
+.editProfileDialog {
+  position: absolute;
+  top: 3%;
+  height: 70vh; /* Set your desired height here */
+}
