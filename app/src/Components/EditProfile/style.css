@@ -10,6 +10,7 @@
 #profileImage {
   justify-content: center;
   padding-bottom: 4%;
+  cursor: pointer;
 }
 
 .profileImageContainer {

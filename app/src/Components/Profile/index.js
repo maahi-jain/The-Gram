@@ -1,18 +1,17 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Avatar, Button } from '@mui/material';
-import useWindowSize from '../../customHooks/useWindowSize';
-import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { follow, getUserPost, unfollow } from '../Service/api.service';
-import GridPost from '../GridPost';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import UserList from '../UserList';
 import EditProfile from '../EditProfile';
+import GridPost from '../GridPost';
+import { follow, getUserPost, unfollow } from '../Service/api.service';
+import UserList from '../UserList';
 import './style.css';
 
 export default function Profile() {
@@ -81,7 +80,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar sx={{ height: '100px', width: '100px' }} src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
+                <Avatar sx={{ height: '100px', width: '100px' }} className='profileAvatar' src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
@@ -93,13 +92,13 @@ export default function Profile() {
             <Box sx={{ width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <TabList onChange={handleChange} aria-label="lab API tabs example">
+                        <TabList onChange={handleChange}>
                             <Tab label="Posts" value="1" />
                             <Tab label={user.followers?.length + "\n followers"} value="2" />
                             <Tab label={user.following?.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1"><GridPost posts={posts} myProfile={myProfile} refreshPost={getPost} /></TabPanel>
+                    <TabPanel value="1" ><GridPost className='postPanel' posts={posts} myProfile={myProfile} refreshPost={getPost} /></TabPanel>
                     <TabPanel value="2"><UserList users={user.followers} /></TabPanel>
                     <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
