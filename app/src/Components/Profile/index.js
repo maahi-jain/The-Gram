@@ -80,7 +80,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar sx={{ height: '100px', width: '100px' }} className='profileAvatar' src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
+                <Avatar sx={{ height: '100px', width: '100px' }} src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>
@@ -98,7 +98,7 @@ export default function Profile() {
                             <Tab label={user.following?.length + "\n following"} value="3" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1" ><GridPost className='postPanel' posts={posts} myProfile={myProfile} refreshPost={getPost} /></TabPanel>
+                    <TabPanel value="1"><GridPost posts={posts} myProfile={myProfile} refreshPost={getPost} /></TabPanel>
                     <TabPanel value="2"><UserList users={user.followers} /></TabPanel>
                     <TabPanel value="3"><UserList users={user.following} /></TabPanel>
                 </TabContext>
