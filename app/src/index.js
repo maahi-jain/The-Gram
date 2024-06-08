@@ -7,6 +7,7 @@ import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const ConnectedApp = () => {
+  console.log("Getting rendered!")
   return (
     <React.StrictMode>
       <Provider store={store}>
