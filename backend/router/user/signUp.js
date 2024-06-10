@@ -1,7 +1,8 @@
 import User from "../../db/models/user.js";
 import bcrypt from 'bcrypt';
+import React from "react";
 
-const signUp = async (req, res) => {
+const SignUp = async (req, res) => {
     try {
         let body = req.body;
         let hashedPassword = await bcrypt.hash(body.password, 12)
@@ -25,4 +26,4 @@ const signUp = async (req, res) => {
     }
 }
 
-export default signUp;
+export default SignUp;
