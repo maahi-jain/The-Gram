@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, TextField } from "@mui/material
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css"
 import { AuthCtx } from "../../customHooks/useAuthentication";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Login = () => {
@@ -39,9 +39,11 @@ const Login = () => {
             </Card>
             <div className="actionBox">
                 <a href="/">Forgot Password?</a>
-                <a href="/signup">Sign up</a>
+                <Link to="/signup">
+                    signUp
+                </Link>
             </div>
-        </div>
+        </div >
     )
 }
 
