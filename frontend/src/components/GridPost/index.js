@@ -2,6 +2,7 @@ import { Dialog, DialogContent, Grid, Paper, styled } from "@mui/material"
 import "./style.css";
 import Post from "../Post";
 import { useState } from "react";
+import React from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
