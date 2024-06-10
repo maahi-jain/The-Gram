@@ -1,6 +1,5 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -33,7 +32,6 @@ module.exports = {
                 { from: 'public', to: '.' } // Copies all files from 'public' to 'dist'
             ],
         }),
-        new Dotenv(), // Add this line
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
