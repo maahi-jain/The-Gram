@@ -1,6 +1,5 @@
 import User from "../../db/models/user.js";
 import bcrypt from 'bcrypt';
-import React from "react";
 
 const SignUp = async (req, res) => {
     try {
@@ -12,17 +11,22 @@ const SignUp = async (req, res) => {
             password: hashedPassword,
             phoneNumber: body.phoneNumber,
             email: body.email,
-            profilePic: req.file.path,
+            profilePic: req?.file?.path,
             bio: body.bio
         });
-
+        let userExists = User.find({ userId: user.userId });
+        if (userExists) {
+            let error = new Error("UserId not available!");
+            error.statusCode = 400;
+            throw error;
+        }
         User.create(user).then((result) => {
             res.status(200).send({ message: "User created successfully!--" })
         }).catch((err) => {
             res.status(500).send({ message: err.message });
         })
     } catch (err) {
-        res.status(500).send({ message: "Error while creating user" + err.message })
+        res.status(err.statusCode || 500).send({ message: "Error while creating user --" + err.message })
     }
 }
 

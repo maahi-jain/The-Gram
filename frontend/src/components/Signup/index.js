@@ -53,7 +53,7 @@ const Signup = () => {
             </h2>
             <Card>
                 <CardContent>
-                    <form onSubmit={handleSubmit} enctype="multipart/form-data">
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="input">
                             <TextField type="file" name="profilePic" onChange={handleInputChange} label="Profile picture" variant="outlined" focused />
                         </div>

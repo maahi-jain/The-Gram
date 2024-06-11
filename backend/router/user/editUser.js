@@ -9,7 +9,7 @@ const editUser = async (req, res) => {
         }
         let userId = req.params.id;
         const updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following");
-        if (user?.profilePic) {
+        if (user?.profilePic && req.user?.profilePic) {
             fs.unlink(req.user?.profilePic, (err) => {
                 if (err) {
                     console.error(err)
