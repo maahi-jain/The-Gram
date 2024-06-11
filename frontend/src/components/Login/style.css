@@ -1,11 +1,20 @@
 .container {
-  margin: 8% 20%;
-  text-align: center;
-  width: 40%;
+  margin: auto;
+  padding-top: 10%;
+  width: 70%;
+}
+
+.container .MuiButton-root {
+  display: flex;
+  margin: auto;
 }
 
 .input {
   margin-block-end: 10%;
+}
+
+.input div {
+  width: 100%;
 }
 
 .loginButton {
