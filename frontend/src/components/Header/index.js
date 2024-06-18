@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 const Header = () => {
     return <AppBar id="header">
         <Toolbar className="headerToolBar">
-            <h1 className="header">The Gram</h1>
-            <Link to="/chat">
+            <h1 className="heading">The Gram</h1>
+            {/* <Link to="/chat">
                 <ChatBubbleOutlineIcon />
-            </Link>
+            </Link> */}
         </Toolbar>
     </AppBar>
 }
