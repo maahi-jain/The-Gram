@@ -9,7 +9,7 @@ import follow from "./follow.js";
 import unfollow from "./unfollow.js";
 import getUserDetails from "./getUserDetails.js";
 import editUser from "./editUser.js";
-const upload = multer({ dest: 'uploads/profilePic' });
+import { upload } from "../../middelware/upload.js";
 
 const router = Router();
 

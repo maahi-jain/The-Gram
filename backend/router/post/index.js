@@ -7,7 +7,7 @@ import addLike from "./addLike.js";
 import editPost from "./editPost.js";
 import deletePost from "./deletePost.js";
 import unlike from "./unlike.js";
-const upload = multer({ dest: 'uploads/post' })
+import { upload } from "../../middelware/upload.js"
 
 const router = Router();
 

@@ -4,8 +4,8 @@ import fs from "fs";
 const editUser = async (req, res) => {
     try {
         let user = req.body;
-        if (req.file?.path) {
-            user['profilePic'] = req.file?.path
+        if (req.file?.location) {
+            user['profilePic'] = req.file?.location
         }
         let userId = req.params.id;
         const updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following");
