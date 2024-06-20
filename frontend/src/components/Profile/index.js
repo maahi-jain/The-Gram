@@ -80,7 +80,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar sx={{ height: '100px', width: '100px' }} src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} />
+                <Avatar sx={{ height: '100px', width: '100px' }} src={`${user.profilePic}`} title={user.name} />
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>

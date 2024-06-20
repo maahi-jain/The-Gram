@@ -5,7 +5,7 @@ const createPost = async (req, res) => {
         let body = req.body;
         let user = req.user;
         let post = {
-            content: req.file.path,
+            content: req.file.key,
             caption: body.caption,
             user: user._id
         };

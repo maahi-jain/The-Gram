@@ -13,7 +13,7 @@ const EditProfile = ({ open, onClose }) => {
         phoneNumber: user.phoneNumber,
         bio: user.bio
     });
-    const [imageSrc, setImageSrc] = useState(`${process.env.REACT_APP_API_URL}/${user.profilePic}`)
+    const [imageSrc, setImageSrc] = useState(`${user.profilePic}`)
     const [errorMessage, setErrorMessage] = useState();
     const [successMessage, setSuccessMessage] = useState();
 

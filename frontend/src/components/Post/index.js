@@ -71,7 +71,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
     return (
         <>
             <Card className="post">
-                <CardHeader avatar={<Avatar src={`${process.env.REACT_APP_API_URL}/${user.profilePic}`} title={user.name} subheader={postedSince} />}
+                <CardHeader avatar={<Avatar src={`${user.profilePic}`} title={user.name} subheader={postedSince} />}
                     title={user.name}
                     subheader={postedSince}
                     action={
@@ -79,7 +79,7 @@ const Post = ({ post, myProfile, refreshPost, close }) => {
                             <MoreVertIcon />
                         </IconButton>
                     } />
-                <CardMedia component="img" alt="post" src={`${process.env.REACT_APP_API_URL}/${content}`} />
+                <CardMedia component="img" alt="post" src={`${content}`} />
                 <CardContent>
                     {!editMode && cardContent}
                     {editMode && <div className='editCaption'><Input value={cardContent} onChange={(event) => setCardContent(event.target.value)} /><Button variant='contained' onClick={confirmEdit}>Save</Button></div>}

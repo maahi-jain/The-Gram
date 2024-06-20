@@ -27,7 +27,7 @@ const GridPost = ({ posts, myProfile, refreshPost }) => {
     return <>
         {posts?.length > 0 && <Grid container direction="row" m={4} spacing={1}>
             {posts.map((post) => <Grid key={post._id} item s={2}>
-                <Item onClick={() => handleClick(post)}><img className="gridImage" alt="user-post" src={`${process.env.REACT_APP_API_URL}/${post.content}`} /></Item>
+                <Item onClick={() => handleClick(post)}><img className="gridImage" alt="user-post" src={`${post.content}`} /></Item>
             </Grid>)}
         </Grid>
         }
