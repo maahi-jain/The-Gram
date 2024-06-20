@@ -19,9 +19,9 @@ const editUser = async (req, res) => {
 
         // Delelte previous profile pic
         if (user?.profilePic && req.user?.profilePic) {
-            await deleteObject(req.user?.profilePic)
+            await deleteObject(req.user?.profilePic);
+            console.log("previous profile delted succesfully!")
         }
-        console.log("previous profile delted succesfully!")
         res.status(200).send({ status: "Success", _user: updatedUser });
     } catch (err) {
         console.log(err.message);
