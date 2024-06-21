@@ -80,7 +80,7 @@ export default function Profile() {
     return (
         <>
             <div className='profileDetails'>
-                <Avatar sx={{ height: '100px', width: '100px' }} src={`${user.profilePic}`} title={user.name} />
+                <Avatar sx={{ height: '100px', width: '100px' }} src={`${user.profileUrl}`} title={user.name} />
                 <div>
                     <div>{user.name}</div>
                     <div>{user.bio}</div>

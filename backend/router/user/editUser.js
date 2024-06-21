@@ -11,11 +11,9 @@ const editUser = async (req, res) => {
         let userId = req.params.id;
 
         // Find and update user
-        const updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following");
+        let updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following").lean();
+        updatedUser = User.hydrate(updatedUser).toJSON();
         console.log("User updated succesfully");
-
-        // get presinged Url for profilePic
-        updatedUser.profilePic = await getPresignedUrl(updatedUser.profilePic);
 
         // Delelte previous profile pic
         if (user?.profilePic && req.user?.profilePic) {

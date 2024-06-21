@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { getPresignedUrl } from "../../utils/s3Operations.js";
 
 const UserSchema = new Schema({
     name: {
@@ -43,6 +44,19 @@ const UserSchema = new Schema({
         ref: 'User'
     }]
 })
+
+// Virtual property for pre-signed URL
+UserSchema.virtual('profileUrl').get(function () {
+    if (this.profilePic) {
+        let url = getPresignedUrl(this.profilePic);
+        return url;
+    }
+    return null;
+});
+
+// Ensure virtual fields are serialized
+UserSchema.set('toObject', { virtuals: true });
+UserSchema.set('toJSON', { virtuals: true });
 
 const User = model("User", UserSchema);
 

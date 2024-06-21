@@ -17,7 +17,7 @@ const UserList = ({ users }) => {
                 <div key={user._id}>
                     <ListItem key={user._id} onClick={() => navigateToProfile(user._id)} className="userListItem">
                         <ListItemAvatar>
-                            <Avatar src={`${user?.profilePic}`} />
+                            <Avatar src={`${user?.profileUrl}`} />
                         </ListItemAvatar>
                         <ListItemText>{user.name}</ListItemText>
                     </ListItem>

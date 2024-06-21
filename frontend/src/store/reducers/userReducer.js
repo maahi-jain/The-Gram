@@ -4,7 +4,7 @@ const initalState = {
     name: '',
     email: '',
     bio: '',
-    profilePic: '',
+    profileUrl: '',
     followers: [],
     following: []
 };
@@ -20,7 +20,7 @@ const userReducer = (state = initalState, action) => {
                 userId: action.user?.userId,
                 name: action.user?.name,
                 bio: action.user?.bio,
-                profilePic: action.user?.profilePic,
+                profileUrl: action.user?.profileUrl,
                 followers: action.user?.followers,
                 following: action.user?.following
             }
