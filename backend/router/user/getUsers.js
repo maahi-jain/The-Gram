@@ -3,7 +3,7 @@ import User from "../../db/models/user.js";
 const getUsers = async (req, res) => {
     try {
         const q = req.query.q || '';
-        const loggedInUserId = req.user._id;
+        const loggedInUserId = req.userId;
 
         console.log("Search value--" + q);
         // Exclude loggedin user

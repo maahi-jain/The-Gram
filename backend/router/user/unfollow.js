@@ -2,7 +2,7 @@ import User from "../../db/models/user.js";
 
 const unfollow = async (req, res) => {
     try {
-        let loggedInUserId = req.user._id;
+        let loggedInUserId = req.userId;
         let followingUserId = req.params.userId;
 
         // Remove following user from follow list

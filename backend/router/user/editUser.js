@@ -9,14 +9,20 @@ const editUser = async (req, res) => {
             user['profilePic'] = req.file?.key
         }
         let userId = req.params.id;
+        let previousUser;
+
+        // if profile pic is update, find previous profilePic to delte
+        if (user.profilePic) {
+            previousUser = await User.findById(userId, { returnOriginal: true }).select('profilePic');
+        }
 
         // Find and update user
         let updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following").lean();
         console.log("User updated succesfully");
 
         // Delelte previous profile pic
-        if (user?.profilePic && req.user?.profilePic) {
-            await deleteObject(req.user?.profilePic);
+        if (user?.profilePic && updatedUser) {
+            await deleteObject(previousUser?.profilePic);
             console.log("previous profile delted succesfully!")
         }
         res.status(200).send({ status: "Success", _user: updatedUser });

@@ -3,11 +3,11 @@ import Post from "../../db/models/post.js";
 const createPost = async (req, res) => {
     try {
         let body = req.body;
-        let user = req.user;
+        let userId = req.userId;
         let post = {
             content: req.file.key,
             caption: body.caption,
-            user: user._id
+            user: userId
         };
         Post.create(post).then((result) => {
             console.log(result);

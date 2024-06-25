@@ -2,7 +2,7 @@ import User from "../../db/models/user.js";
 
 const follow = async (req, res) => {
     try {
-        let loggedInUserId = req.user._id;
+        let loggedInUserId = req.userId;
         let followingId = req.params.userId;
 
         // Add to following of loggedin user

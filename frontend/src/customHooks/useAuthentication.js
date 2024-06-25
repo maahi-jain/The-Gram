@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { loginService } from "../components/Service/api.service";
+import { getUserDetails, loginService } from "../components/Service/api.service";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../store/action";
 import { jwtDecode } from "jwt-decode";
@@ -25,7 +25,8 @@ const AuthProvider = ({ children }) => {
         doLogin(userIdOrEmail, password).then(async (token) => {
             let decodedToken = jwtDecode(token);
             await dispatchSetToken(token);
-            await dispatchSetUser(decodedToken.user);
+            let res = await getUserDetails(decodedToken.id);
+            await dispatchSetUser(res.user);
             setError(null);
         }).catch((error) => {
             dispatchSetUser(null);

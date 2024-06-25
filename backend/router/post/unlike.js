@@ -3,7 +3,7 @@ import Post from "../../db/models/post.js";
 const unlike = async (req, res) => {
     try {
         let id = req.params.id;
-        let loggedInUserId = req.user._id;
+        let loggedInUserId = req.userId;
         let post = await Post.findByIdAndUpdate(id, {
             $pull: { likes: loggedInUserId }
         }, { new: true }).lean();
