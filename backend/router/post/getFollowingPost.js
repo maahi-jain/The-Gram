@@ -3,7 +3,7 @@ import Post from "../../db/models/post.js";
 const getFollowingPost = async (req, res) => {
     try {
         const followingList = req.user.following;
-        let posts = await Post.find({ user: { $in: followingList } }).populate('user', 'name profilePic');
+        let posts = await Post.find({ user: { $in: followingList } }).populate('user', 'name profilePic').lean();
         res.status(200).send({ posts })
     } catch (err) {
         console.log(err.message);

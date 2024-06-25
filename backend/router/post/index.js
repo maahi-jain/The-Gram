@@ -7,11 +7,12 @@ import addLike from "./addLike.js";
 import editPost from "./editPost.js";
 import deletePost from "./deletePost.js";
 import unlike from "./unlike.js";
-import { upload } from "../../middelware/upload.js"
+import { upload, withFolderName } from "../../middelware/upload.js";
+import { S3_POST_PATH } from "../../utils/constant.js";
 
 const router = Router();
 
-router.post("/", upload.single("content"), authenticate, createPost);
+router.post("/", withFolderName(S3_POST_PATH), upload.single("content"), authenticate, createPost);
 router.get("/", authenticate, getFollowingPost);
 router.post("/:id/like", authenticate, addLike);
 router.post("/:id/unlike", authenticate, unlike);

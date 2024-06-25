@@ -6,7 +6,7 @@ const addLike = async (req, res) => {
         let loggedInUserId = req.user._id;
         let post = await Post.findByIdAndUpdate(id, {
             $addToSet: { likes: loggedInUserId }
-        }, { new: true });
+        }, { new: true }).lean();
         res.status(200).send({ message: { post } })
     } catch (err) {
         console.log("Error while liking the post", err);
