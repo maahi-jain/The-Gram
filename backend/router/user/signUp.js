@@ -11,11 +11,11 @@ const SignUp = async (req, res) => {
             password: hashedPassword,
             phoneNumber: body.phoneNumber,
             email: body.email,
-            profilePic: req?.file?.path,
+            profilePic: req?.file?.key,
             bio: body.bio
         });
-        let userExists = User.find({ userId: user.userId });
-        if (userExists) {
+        let userExists = await User.find({ userId: user.userId });
+        if (userExists.length > 0) {
             let error = new Error("UserId not available!");
             error.statusCode = 400;
             throw error;
