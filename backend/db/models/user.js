@@ -43,20 +43,34 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }]
-})
-
-// Virtual property for pre-signed URL
-UserSchema.virtual('profileUrl').get(function () {
-    if (this.profilePic) {
-        let url = getPresignedUrl(this.profilePic);
-        return url;
-    }
-    return null;
 });
 
-// Ensure virtual fields are serialized
-UserSchema.set('toObject', { virtuals: true });
-UserSchema.set('toJSON', { virtuals: true });
+const generatePresignedUrl = async (doc) => {
+    if (!doc.profilePic) {
+        return; // No image URL, nothing to do
+    }
+    let url = await getPresignedUrl(doc.profilePic);
+    doc.profileUrl = url;
+};
+
+
+UserSchema.post('find', async (docs) => {
+    await Promise.all(docs.map(generatePresignedUrl));
+});
+
+UserSchema.post('findOne', async (doc) => {
+    if (doc) {
+        await generatePresignedUrl(doc);
+    }
+});
+
+UserSchema.post('findOneAndUpdate', async (doc) => {
+    if (doc) {
+        await generatePresignedUrl(doc);
+    }
+});
+
+UserSchema.plugin(generatePresignedUrl); // Apply the plugin
 
 const User = model("User", UserSchema);
 

@@ -10,7 +10,6 @@ const login = async (req, res) => {
         let user = await User.findOne({ $or: [{ userId: userIdOrEmail }, { email: userIdOrEmail }] }).populate('followers', '-password').populate('following', '-password').lean();
         const match = user && await bcrypt.compare(password, user.password);
         delete user.password;
-        user = User.hydrate(user).toJSON();
 
         if (match) {
             console.log("User found!");

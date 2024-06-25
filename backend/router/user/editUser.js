@@ -12,7 +12,6 @@ const editUser = async (req, res) => {
 
         // Find and update user
         let updatedUser = await User.findByIdAndUpdate(userId, user, { new: true }).populate("followers").populate("following").lean();
-        updatedUser = User.hydrate(updatedUser).toJSON();
         console.log("User updated succesfully");
 
         // Delelte previous profile pic

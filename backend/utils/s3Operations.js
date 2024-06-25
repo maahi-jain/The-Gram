@@ -3,9 +3,9 @@ import s3 from "./awsConfig.js";
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 
-export const getPresignedUrl = (objectKey) => {
+export const getPresignedUrl = async (objectKey) => {
     const command = new GetObjectCommand({ Bucket: process.env.S3_BUCKET_NAME, Key: objectKey });
-    const signedUrl = getSignedUrl(s3, command);
+    const signedUrl = await getSignedUrl(s3, command);
     return signedUrl;
 }
 
