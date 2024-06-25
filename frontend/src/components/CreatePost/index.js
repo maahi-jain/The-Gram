@@ -19,7 +19,7 @@ const CreatePost = ({ open, onClose }) => {
             setErrorMessage(null);
             setTimeout(() => {
                 onClose(false);
-                navigate("/");
+                navigate("/profile", { state: { reload: true } });
                 setSuccessMessage(null);
             }, 2000);
         }).catch((err) => {

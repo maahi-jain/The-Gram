@@ -17,6 +17,7 @@ import './style.css';
 export default function Profile() {
     const [value, setValue] = React.useState('1');
     const location = useLocation();
+    const reload = location.state?.reload;
     const [searchUser, setSearchUser] = useState(location.state?.user);
     const [showFollow, setShowFollow] = useState(true);
     const [myProfile, setMyProfile] = useState(false);
@@ -30,17 +31,17 @@ export default function Profile() {
 
     useEffect(() => {
         user = searchUser || loggedInUser;
-    }, [])
+    }, [reload])
 
     useEffect(() => {
         setMyProfile(!searchUser || searchUser._id === loggedInUser._id);
-    }, [searchUser, loggedInUser]);
+    }, [searchUser, loggedInUser, reload]);
 
     useEffect(() => {
         setSearchUser(location.state?.user);
-    }, [location.state?.user]);
+    }, [location.state?.user, reload]);
 
-    useEffect(() => { getPost() }, [user.userId])
+    useEffect(() => { getPost() }, [user.userId, reload])
 
     const getPost = () => {
         getUserPost(user.userId).then((res) => {

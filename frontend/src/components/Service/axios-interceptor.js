@@ -34,7 +34,9 @@ const responseInterceptor = () => {
             }
             return response;
         },
-        (error) => {
+        async (error) => {
+            let loadingAction = await hideLoader();
+            dispatch(loadingAction);
             // Handle response errors
             return Promise.reject(error);
         }

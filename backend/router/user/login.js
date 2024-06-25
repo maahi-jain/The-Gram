@@ -9,9 +9,9 @@ const login = async (req, res) => {
         const password = body.password;
         let user = await User.findOne({ $or: [{ userId: userIdOrEmail }, { email: userIdOrEmail }] }).populate('followers', '-password').populate('following', '-password').lean();
         const match = user && await bcrypt.compare(password, user.password);
-        delete user.password;
+        delete user?.password;
 
-        if (match) {
+        if (user && match) {
             console.log("User found!");
             var token = jwt.sign({ user }, process.env.jwt_secret);
             res.status(200).send({ token: token });
